@@ -1,7 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 app = Flask(__name__)
 
-
+#Route used to render a HTML file that can be edited in the templates folder.
 @app.route('/')
 def index():
     return render_template("index.html")
@@ -17,6 +17,7 @@ def courseplanning():
 @app.route('/degreeflow')
 def degreeflow():
     return render_template("degreeflow.html")
+
 
 
 if __name__ == '__main__':

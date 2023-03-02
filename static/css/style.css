@@ -7,6 +7,19 @@
     color: white;
 }
 
+.page-title h1{
+    font-size: 70px;
+    text-shadow: 1px 1px 2px #852135, 0 0 1em white, 0 0 0.2em #852135;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 .homepage-content {
     width: 100%;
     margin-bottom: 20px;
@@ -18,3 +31,39 @@
     align-items: center;
     text-align: center;
 }
+
+.questionnaire {
+    font-size: 30px;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.btn btn-primary {
+    background-color: #852135;
+    padding: 0;
+    border: none;
+    color: white;
+}
+
+.helpful-links {
+    font-size: 30px;
+    
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+

@@ -2,58 +2,59 @@
 
     {% block content %}
 
-    {% endblock %}
+  <div class="page-title">
+  <h1><br>Course Planning</h1>
+  </div>
+  <div class="container text-center">
+      <div class="row align-items-start">
+        <div class="col">
+          <h1><br>Get your course schedule</h1>
+          <form action="{{ url_for("courseplanning") }}" method="POST">
+              <div class="questionnaire">
+                <label for="studentStatusInput" class="form-label"><br>Select your student status:<br></label>
+                  <select class="form-select" id="studentStatusInput" name="status">
+                      <option selected>Choose...</option>
+                      <option value="Freshman">Freshman</option>
+                      <option value="Sophomore">Sophomore</option>
+                      <option value="Junior">Junior</option>
+                      <option value="Senior">Senior</option>
+                  </select>
+         
+              </div>
+              <div class="questionnaire">
+                <label for="majorInput" class="form-label">Select your major:<br></label>
+                  <select class="form-select" id="majorInput" name="major">
+                      <option selected>Choose...</option>
+                      <option value="Computer Science (BA)">Computer Science (BA)</option>
+                      <option value="Computer Science (BS)">Computer Science (BS)</option>
+                      <option value="Other">Other</option>
+                  </select>
+              </div>
+              <div class="questionnaire">
+                  <label class="form-label" for="customFile">Upload your STAR Audit:</label>
+                  <input type="file" class="form-control" id="customFile" name="audit" />
+                </div>
+              <div class="questionnaire">
+                  <button class="btn btn-primary" type="submit" style="background-color: #852135;">Submit</button>
+              </div>
+            
 
-    
-    <div class="page-title">
-        <h1><br>Course Planning</h1>
-    </div>
-    <div class="container text-center">
-        <div class="row align-items-start">
-          <div class="col">
-            <h1><br>Get your course schedule</h1>
-            <form>
-                <div class="questionnaire">
-                  <label for="studentStatusInput" class="form-label"><br>Select your student status:<br></label>
-                    <select class="form-select" id="studentStatusInput">
-                        <option selected>Choose...</option>
-                        <option value="1">Freshman</option>
-                        <option value="2">Sophomore</option>
-                        <option value="3">Junior</option>
-                        <option value="4">Senior</option>
-                    </select>
-                </div>
-                <div class="questionnaire">
-                  <label for="majorInput" class="form-label">Select your major:<br></label>
-                    <select class="form-select" id="majorInput">
-                        <option selected>Choose...</option>
-                        <option value="1">Computer Science (BA)</option>
-                        <option value="2">Computer Science (BS)</option>
-                        <option value="3">Other</option>
-                    </select>
-                </div>
-                <div class="questionnaire">
-                    <label class="form-label" for="customFile">Upload your STAR Audit:</label>
-                    <input type="file" class="form-control" id="customFile" />
-                  </div>
-                <div class="questionnaire">
-                    <button class="btn btn-primary" type="submit" style="background-color: #852135;">Submit</button>
-                </div>
-              </form>
-
-          </div>
-          <div class="col">
-            <div class="helpful-links">
-                <h1><br>Helpful Links for New Students</h1>
-                    <a href="https://admissions.nmsu.edu/">Admissions</a>
-                    <a href="https://advising.nmsu.edu/">Central Advising</a>
-                    <a href="https://fa.nmsu.edu/">Financial Aid</a>
-                    <a href="https://scholarships.nmsu.edu/">Scholar Dollars</a>
-                    <a href="https://computerscience.nmsu.edu/">NMSU Computer Science Website</a>
-                    <a href="https://degreeaudit.nmsu.edu/selfservice/general/login.html?src=userrequired">STAR Degree Audit</a>
-                    <a href="https://catalogs.nmsu.edu/nmsu/arts-sciences/computer-science/#coursestext">CS Course Listing</a>
-                    <a href="https://computerscience.nmsu.edu/majors/three-year-course-rotation.html">CS Three Year Course Rotation</a>
-            </div>
+        </div>
+        <div class="col">
+          <div class="helpful-links">
+              <h1><br>Helpful Links for New Students</h1>
+                  <a href="https://admissions.nmsu.edu/">Admissions</a>
+                  <a href="https://advising.nmsu.edu/">Central Advising</a>
+                  <a href="https://fa.nmsu.edu/">Financial Aid</a>
+                  <a href="https://scholarships.nmsu.edu/">Scholar Dollars</a>
+                  <a href="https://computerscience.nmsu.edu/">NMSU Computer Science Website</a>
+                  <a href="https://degreeaudit.nmsu.edu/selfservice/general/login.html?src=userrequired">STAR Degree Audit</a>
+                  <a href="https://catalogs.nmsu.edu/nmsu/arts-sciences/computer-science/#coursestext">CS Course Listing</a>
+                  <a href="https://computerscience.nmsu.edu/majors/three-year-course-rotation.html">CS Three Year Course Rotation</a>
           </div>
         </div>
       </div>
+    </div>
+    {% endblock %}
+
+    

@@ -76,3 +76,152 @@
 }
 
 
+
+:root {
+    --level-1: #692737;
+    --level-2: #a58e63;
+    --level-3: #48608b;
+    --level-4: #9c1f32;
+    --white: rgb(255, 255, 255);
+}
+
+
+.chart-container-bs {
+    padding: 0 10px;
+    margin: 0;
+    box-sizing: border-box;
+    max-width: 1000px;
+    margin: auto;
+    height: 110%;
+}
+
+.chart-container-bs .ol {
+    list-style: none;
+}
+
+
+
+.level-1-box {
+    width: 50%;
+    margin: 0 auto 40px;
+    background: var(--level-1);
+    border-radius: 5%;
+    color: white;
+    text-align: center;
+    box-shadow: 0 0 8px #852135;
+  }
+
+
+.level-2-wrapper {
+  position: relative;
+  display: grid;
+  list-style: none;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.level-2-wrapper li {
+  position: relative;
+}
+
+.level-2-box {
+  width: 70%;
+  margin: 0 auto 40px;
+  background: var(--level-2);
+  color: white;
+  list-style: none;
+  text-align: center;
+}
+
+
+.level-3-wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 20px;
+  width: 90%;
+  margin: 0 auto;
+  list-style: none;
+  margin-right: 10%;
+}
+
+.level-3-wrapper > li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  width: 2px;
+  height: 40px;
+  background: var(--white);
+}
+
+.level-3-box {
+  margin-bottom: 40px;
+  background: var(--level-3);
+  text-align: center;
+  margin-right: 10%;
+}
+
+.level-4-wrapper {
+  position: relative;
+  width: 100%;
+  margin-left: -2em;
+  list-style: none;
+  align-content: center;
+}
+
+.level-4-wrapper li + li {
+  margin-top: 20px;
+}
+
+.level-4-box {
+  font-weight: normal;
+  margin-bottom: 15%;
+  background: var(--level-4);
+  text-align: center;
+  align-items: left;
+  width: 110%;
+  height: 110%;
+}
+
+
+@media screen and (max-width: 700px) {
+  .rectangle {
+    padding: 20px 10px;
+  }
+
+  .level-1-box,
+  .level-2 {
+    width: 100%;
+  }
+
+  .level-1-box {
+    margin-bottom: 20px;
+  }
+
+  .level-1-box::before,
+  .level-2-wrapper > li::before {
+    display: none;
+  }
+  
+  .level-2-wrapper,
+  .level-2-wrapper::after,
+  .level-2::after {
+    display: block;
+  }
+
+  .level-2-wrapper {
+    width: 90%;
+    margin-left: 10%;
+  }
+
+  .level-2-wrapper::before {
+    left: -20px;
+    width: 2px;
+    height: calc(100% + 40px);
+  }
+
+  .level-2-wrapper > li:not(:first-child) {
+    margin-top: 50px;
+  }
+}

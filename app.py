@@ -1,8 +1,8 @@
 import os
 from werkzeug.utils import secure_filename
 from flask import *
-# from flask_wtf import *
-# from wtforms import *
+#from flask_wtf import *
+#sfrom wtforms import *
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024

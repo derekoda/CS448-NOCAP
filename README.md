@@ -8,7 +8,7 @@ source /<path>/CS448-NOCAP/bin/activate
 To install project download flask
 
 Update---3/5-- 1.3.DO
-    Implemented the 'About Us' page. Added a footer to base page. Worked on receiving file objects from POST request. Working through how to retrieve them so Manny can scrape them.
+    Implemented the 'About Us' page. Implemented the 'Contact Us' page. Added a footer to base page. Worked on receiving file objects from POST request. Working through how to retrieve them so Manny can scrape them.
     
 Update---3/4-- 1.2.MH 
     Created a base.html: here holds the top nav along with title, scripts, opening and closing tags. So 

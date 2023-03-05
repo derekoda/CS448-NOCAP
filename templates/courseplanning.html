@@ -9,8 +9,10 @@
       <div class="row align-items-start">
         <div class="col">
           <h1><br>Get your course schedule</h1>
-          <form action="{{ url_for("courseplanning") }}" method="POST">
-              <div class="questionnaire">
+          
+          <form action="{{url_for('courseplanning')}}" method="post">
+           
+            <div class="questionnaire">
                 <label for="studentStatusInput" class="form-label"><br>Select your student status:<br></label>
                   <select class="form-select" id="studentStatusInput" name="status">
                       <option selected>Choose...</option>
@@ -19,7 +21,7 @@
                       <option value="Junior">Junior</option>
                       <option value="Senior">Senior</option>
                   </select>
-         
+                
               </div>
               <div class="questionnaire">
                 <label for="majorInput" class="form-label">Select your major:<br></label>
@@ -32,7 +34,7 @@
               </div>
               <div class="questionnaire">
                   <label class="form-label" for="customFile">Upload your STAR Audit:</label>
-                  <input type="file" class="form-control" id="customFile" name="audit" />
+                  <input type="file" class="form-control" id="customFile" name="audit" accept=".pdf"/>
                 </div>
               <div class="questionnaire">
                   <button class="btn btn-primary" type="submit" style="background-color: #852135;">Submit</button>

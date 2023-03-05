@@ -3,3 +3,6 @@
 pyvenv.cfg
 /lib
 /__pycache__
+.JPG
+.jpeg
+.svg

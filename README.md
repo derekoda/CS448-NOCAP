@@ -7,6 +7,9 @@ source /<path>/CS448-NOCAP/bin/activate
 
 To install project download flask
 
+Update---3/5-- 1.2.MR
+    Added the base degree flowchart. Open to suggestions for overall appearance and styles. Tons of styles were added to css file. Footer blocks bottom of the Junior branch in the chart. This chart is represented by the reccommended path from the CS department. Will add buttons to switch to BA major, along with information on each class later.
+
 Update---3/5-- 1.3.DO
     Implemented the 'About Us' page. Added a footer to base page. Worked on receiving file objects from POST request. Working through how to retrieve them so Manny can scrape them.
     

@@ -1,5 +1,5 @@
 html{
-  height: 130%;
+  height: 135%;
 }
 
 .navbar {
@@ -106,7 +106,7 @@ html{
 
 
 .level-1-box {
-    width: 50%;
+    width: 60%;
     margin: 0 auto 40px;
     background: var(--level-1);
     border-radius: 5%;
@@ -128,7 +128,7 @@ html{
 }
 
 .level-2-box {
-  width: 70%;
+  width: 80%;
   margin: 0 auto 40px;
   background: var(--level-2);
   color: white;

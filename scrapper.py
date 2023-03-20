@@ -21,8 +21,10 @@ for page in pdfR.pages:
     string = page.extract_text()
     onString = "CreditsGradeTitle"
     offString = "TermCourse"
+    print(string)
     ###For each line if substring exist print next line
     for line in string: 
+        #print(line)
         if string[0].isdigit():
             flag = True
             print("hello")
@@ -31,7 +33,7 @@ for page in pdfR.pages:
             flag = False
         
         if flag == True:
-            print(string)
+            print(line)
 
         else:
             continue

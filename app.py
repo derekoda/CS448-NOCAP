@@ -51,7 +51,7 @@ def courseplanning_upload():
             if file_ext not in app.config['UPLOAD_EXTENSIONS']:
                 os.abort(400)
             student_audit.save(os.path.join(app.config['UPLOAD_PATH'], filename))
-
+            return "Your file has been uploaded successfully." + student_status + student_major
         return redirect(url_for('courseplanning'))
     
 @app.route('/degreeflow')

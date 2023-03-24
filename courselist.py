@@ -3,8 +3,13 @@ import sqlite3
 connection = sqlite3.connect('courselist.db')
 cursor = connection.cursor()
 
-cursor.execute("create table course_list (id text, name text, credits integer, " + 
-               "description text, prereq text, sem_offered text)")
+cursor.execute("""CREATE TABLE IF NOT EXISTS course_list (
+                id text, 
+                name text, 
+                credits integer, 
+                description text, 
+                prereq text, 
+                sem_offered text);""")
 
 course_list = [
     ('CS111', 'Computer Science Principles', 4, 'This course provides a broad and exciting introduction to the field of computer science and the impact that computation has today on every aspect of life. It focuses on exploring computing as a creative activity and investigates the key foundations of computing: abstraction, data, algorithms, and programming. It looks into how connectivity and the Internet have revolutionized computing and demonstrates the global impact that computing has achieved, and it reveals how a new student in computer science might become part of the computing future.', 'MATH1215', 'FA23, SP24, FA24, SP25'),
@@ -39,6 +44,7 @@ course_list = [
     ('CS494', 'Introduction to Smart Grids', 3, 'This course is an introduction to the technologies and design strategies associated with the Smart Grid. The emphasis will be on the development of communications, energy delivery, coordination mechanisms, and management tools to monitor transmission and distribution networks. Topics include: Smart grid introduction and evolution; Power systems; Networking and transport control; Artificial intelligence & agent coordination; Data mining for smart grids.', 'CS272, EE230', 'SP25'),
     ('CS496', 'Cloud and Edge Computing', 3, 'The course presents a top-down view of cloud computing, from applications and administration to programming and infrastructure. Its main focus is on the concepts of networking and parallel programming for cloud computing and large scale distributed systems which form the cloud infrastructure. The topics include: overview of cloud computing, cloud systems, parallel processing in the cloud, distributed storage systems, virtualization, security in the cloud, and multicore operating systems. Students will study state-of-the-art approaches to cloud computing followed by large cloud corporations, namely Google, Amazon, Microsoft, and Yahoo. Students will also apply what they learn through project developments using Amazon Web Services.', 'CS372', 'SP24, SP25')]
     
-cursor.executemany('insert into course_list values (?,?,?,?,?,?)', course_list)
-    
+#cursor.executemany('INSERT INTO course_list VALUES (?,?,?,?,?,?)', course_list)
+#connection.commit()
+
 connection.close()

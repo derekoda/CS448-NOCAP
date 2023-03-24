@@ -5,10 +5,15 @@ html{
 .navbar {
     background-color: #852135;
     border: 1px solid #ffffff;
+    font-size: 30px;
 }
  
 .navbar .navbar-brand{
     color: white;
+}
+.navbar img {
+  border-radius: 50%;
+  margin-right: 25px;
 }
 
 .page-title h1{

@@ -21,24 +21,21 @@ for page in pdfR.pages:
     string = page.extract_text()
     onString = "CreditsGradeTitle"
     offString = "TermCourse"
-    print(string)
+    lines = string.split('\n')
+   
     ###For each line if substring exist print next line
-    for line in string: 
-        #print(line)
-        if string[0].isdigit():
-            flag = True
-            print("hello")
+    for line in lines: 
+       
+        if line[0].isdigit():
+            if 'TermCourse' in line:
+                line = line.replace('TermCourse', '')
+                if 'CreditsGradeTitle' in line:
+                   line = line.replace('CreditsGradeTitle', '') 
+                   #print(line)
+            else:
+                print(line)
+                line = ''
 
-        if offString in line:
-            flag = False
-        
-        if flag == True:
-            print(line)
-
-        else:
-            continue
-
-    i +=1 
 # create a page object
 #pageObj = pdfR.getPage(0)
 

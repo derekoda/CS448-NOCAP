@@ -1,5 +1,8 @@
 # CS448-NOCAP
 
+Update---3/26--2.2.DO
+    Added an HTML scraper that gives only course number, name, and description. Manny solved the document upload issue.
+    
 Update---3/26--2.1.DO
     Added the NOCAP logo to the navbar and fixed database issue. Currently working on sending PDF from form to scraper.
     

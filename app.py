@@ -31,29 +31,6 @@ def contact():
 def courseplanning():
     return render_template(
         'courseplanning.html')
-
-# gets student status, major, and audit from the form in courseplanning.html
-@app.route('/courseplanning', methods=['GET', 'POST'])
-def courseplanning_upload():
-    if request.method == 'POST':
-        
-        # declare these as globals so we can use them wherever we need to
-        global student_status 
-        global student_major
-        global student_audit
-        
-        student_status = request.form.get("status")
-        student_major = request.form.get("major")
-        
-        student_audit = request.files['audit']
-        filename = secure_filename(student_audit.filename)
-        if filename != '':
-            file_ext = os.path.splitext(filename)[1]
-            if file_ext not in app.config['UPLOAD_EXTENSIONS']:
-                os.abort(400)
-            student_audit.save(os.path.join(app.config['UPLOAD_PATH'], filename))
-            return "Your file has been uploaded successfully." + student_status + student_major
-        return redirect(url_for('courseplanning'))
     
 @app.route('/degreeflow')
 def degreeflow():
@@ -66,14 +43,24 @@ def upload_pdf():
     
     # Process the PDF file here
     if request.method == 'POST':
+        # declare these as globals so we can use them wherever we need to
+        global student_status 
+        global student_major
+        global student_audit
+        
+        student_status = request.form.get("status")
+        student_major = request.form.get("major")
+        
         #stores the PDF in a temp object for processing
-        pdf_file = request.files['pdf_file']
+        student_audit = request.files['audit']
         #if the file exists then lets process
-        if pdf_file:
+        if student_audit:
             #sends to the scrapper and stores it in a variable
-            parsed = scrapper.pdf_from_App(pdf_file)
+            parsed = scrapper.pdf_from_App(student_audit)
             
-        return 'PDF file uploaded successfully'
+        return 'Student status is: ' + student_status + ' and major is: ' + student_major + ' and audit is uploaded'
+
+    return render_template('upload-pdf.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

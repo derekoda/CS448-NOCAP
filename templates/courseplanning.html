@@ -10,7 +10,7 @@
     <div class="col">
       <h1><br>Get your course schedule</h1>
 
-      <form action="{{url_for('courseplanning')}}" method="post" enctype="multipart/form-data">
+      <form action="{{url_for('upload_pdf')}}" method="post" enctype="multipart/form-data">
 
         <div class="questionnaire">
           <label for="studentStatusInput" class="form-label"><br>Select your student status:<br></label>
@@ -33,24 +33,13 @@
           </select>
         </div>
         <div class="questionnaire">
+          <label class="form-label" for="customFile">Upload your STAR Audit:</label>
+          <input type="file" class="form-control" id="customFile" name="audit" accept=".pdf" /> 
           <button class="btn btn-primary" type="submit" style="background-color: #852135;">Submit</button>
         </div>
 
-      </form>
-      <div class="questionnaire">
-        <form action="{{ url_for('upload_pdf') }}" method="post" enctype="multipart/form-data">
-          <input type="file" name="pdf_file">
-          <br><br>
-          <button class="btn btn-primary" type="submit" style="background-color: #852135;">Submit PDF</button>
-          <!--<input type="submit" value="Upload">-->
-        </form>
-        <label class="form-label" for="customFile">Upload your STAR Audit:</label>
-        <input type="file" class="form-control" id="customFile" name="audit" accept=".pdf" />
+      </form>   
       </div>
-
-
-
-    </div>
     <div class="col">
       <div class="helpful-links">
         <h1><br>Helpful Links for New Students</h1>

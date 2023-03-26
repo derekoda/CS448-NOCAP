@@ -2,6 +2,7 @@
 
 Update---3/26--2.1.DO
     Added the NOCAP logo to the navbar and fixed database issue. Currently working on sending PDF from form to scraper.
+    
 Update---3/5-- 1.4.MR
     Added the base degree flowchart. Open to suggestions for overall appearance and styles. Tons of styles were added to css file. Footer blocks bottom of the Junior branch in the chart. This chart is represented by the reccommended path from the CS department. Will add buttons to switch to BA major, along with information on each class later.
 

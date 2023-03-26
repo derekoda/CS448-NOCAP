@@ -1,6 +1,7 @@
 import os
 from werkzeug.utils import secure_filename
 from flask import *
+import scrapper
 #from flask_wtf import *
 #sfrom wtforms import *
 
@@ -57,6 +58,22 @@ def courseplanning_upload():
 @app.route('/degreeflow')
 def degreeflow():
     return render_template("degreeflow.html")
+
+#This route is used to handle the PDF upload from the client side
+#The methods handled by the route are the GET and POST
+@app.route('/upload-pdf', methods=['GET','POST'])
+def upload_pdf():
+    
+    # Process the PDF file here
+    if request.method == 'POST':
+        #stores the PDF in a temp object for processing
+        pdf_file = request.files['pdf_file']
+        #if the file exists then lets process
+        if pdf_file:
+            #sends to the scrapper and stores it in a variable
+            parsed = scrapper.pdf_from_App(pdf_file)
+            
+        return 'PDF file uploaded successfully'
 
 if __name__ == '__main__':
     app.run(debug=True)

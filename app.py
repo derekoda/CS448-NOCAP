@@ -2,6 +2,7 @@ import os
 from werkzeug.utils import secure_filename
 from flask import *
 import scrapper
+import htmlScraper
 #from flask_wtf import *
 #sfrom wtforms import *
 
@@ -56,8 +57,8 @@ def upload_pdf():
         #if the file exists then lets process
         if student_audit:
             #sends to the scrapper and stores it in a variable
-            parsed = scrapper.pdf_from_App(student_audit)
-            
+            #parsed = scrapper.pdf_from_App(student_audit)
+            parsed = htmlScraper.htmlScraper(student_audit)
         return 'Student status is: ' + student_status + ' and major is: ' + student_major + ' and audit is uploaded'
 
     return render_template('upload-pdf.html')

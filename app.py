@@ -1,7 +1,6 @@
 import os
 from werkzeug.utils import secure_filename
 from flask import *
-import scrapper
 import htmlScraper
 #from flask_wtf import *
 #sfrom wtforms import *

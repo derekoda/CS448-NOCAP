@@ -17,7 +17,8 @@ def index():
 
 @app.route('/index')
 def index_redirect():
-    return Flask.redirect(url_for('index'))
+    name = "Manny"
+    return Flask.redirect(url_for('index',name))
 
 @app.route('/about')
 def about():

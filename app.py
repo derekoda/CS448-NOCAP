@@ -30,19 +30,18 @@ def contact():
 
 @app.route('/courseplanning')
 def courseplanning():
-    return render_template(
-        'courseplanning.html')
+    return render_template('courseplanning.html')
     
 @app.route('/degreeflow')
 def degreeflow():
     return render_template("degreeflow.html")
 
-#This route is used to handle the PDF upload from the client side
+#This route is used to handle the HTML upload from the client side
 #The methods handled by the route are the GET and POST
-@app.route('/upload-pdf', methods=['GET','POST'])
-def upload_pdf():
+@app.route('/coursemenu', methods=['GET','POST'])
+def upload_html():
     
-    # Process the PDF file here
+    # Process the HTML file here
     if request.method == 'POST':
         # declare these as globals so we can use them wherever we need to
         global student_status 
@@ -52,16 +51,23 @@ def upload_pdf():
         student_status = request.form.get("status")
         student_major = request.form.get("major")
         
-        #stores the PDF in a temp object for processing
+        # stores the HTML doc in a temp object for processing
         student_audit = request.files['audit']
-        #if the file exists then lets process
+        # if the file exists then process it
         if student_audit:
-            #sends to the scrapper and stores it in a variable
-            #parsed = scrapper.pdf_from_App(student_audit)
-            parsed = htmlScraper.htmlScraper(student_audit)
-        return 'Student status is: ' + student_status + ' and major is: ' + student_major + ' and audit is uploaded'
+            #sends to the scraper and stores it in a variable
+            global course_list
+            course_list = htmlScraper.htmlScraper(student_audit)
+        
+        #return the parsed data to the client
+        #return render_template('upload-pdf.html', parsed=course_list)
+        #return 'Student status is: ' + student_status + ' and major is: ' + student_major + ' and courses taken are: ' + str(course_list)
 
-    return render_template('upload-pdf.html')
+    return render_template('coursemenu.html')
+
+@app.route('/coursemenu', methods=['GET','POST'])
+def course_menu():
+    return render_template('coursemenu.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

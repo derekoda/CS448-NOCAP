@@ -1,12 +1,27 @@
 import sqlite3
 
-connection = sqlite3.connect('courselist.db')
-cursor = connection.cursor()
 
 
-result = cursor.execute("SELECT id FROM course_list")
-print(result.fetchall())
+def getCourseInfo(courseNum):
+
+    print("courseNum input: " + courseNum)
+
+    connection = sqlite3.connect('courselist.db')
+    cursor = connection.cursor()
+
+    result = cursor.execute(f"SELECT description FROM course_list WHERE id = \'CS{courseNum}\'")
+
+
+   # print(result.fetchone())
+
+    return str(result.fetchone())
 
 
 
-connection.close()
+
+# result = cursor.execute("SELECT id FROM course_list WHERE prereq LIKE '%CS272%'")
+# print(result.fetchall())
+
+
+
+# connection.close()

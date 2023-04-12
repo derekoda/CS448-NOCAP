@@ -4,6 +4,10 @@ import string
 import re
 import app
 
+f = '/home/hiddenhentai/Documents/Senior/CS448-NOCAP/CS448-NOCAP/audit_2023-03-04_14 45 05.0_Sat_Mar_04_15 26 30_MST_2023.pdf'
+
+#not tracked
+
 def pdf_from_App(file):
     #creating object
     pdfR = reader(file)
@@ -17,7 +21,7 @@ def pdf_from_App(file):
     new_string= ""
 
     for page in pdfR.pages: 
-        print("***************PAGE: " + str(i))
+        #print("***************PAGE: " + str(i))
     #lets practice print out number of pages on the pdf
 
         #The string will hold each page individually
@@ -29,23 +33,23 @@ def pdf_from_App(file):
     
         ###For each line if substring exist print next line
         for line in lines: 
-            if line[0].isdigit():
-                if 'TermCourse' in line:
-                    line = line.replace('TermCourse', '')
-                    if 'CreditsGradeTitle' in line:
-                        line = line.replace('CreditsGradeTitle', '') 
+            #if line[0].isdigit():
+                #if 'TermCourse' in line:
+                    #line = line.replace('TermCourse', '')
+                    #if 'CreditsGradeTitle' in line:
+                        # line = line.replace('CreditsGradeTitle', '') 
                     #print(line)
-                else:
+                #else:
                     #remove the first word in each line 
-                    space_index = line.find(' ') 
-                    new_string += line[space_index:] + '\n'
-                    print(new_string)
+                    #space_index = line.find(' ') 
+                    #new_string += line[space_index:] + '\n'
+                    #print(new_string)
     #print(new_string)
 
                     #REGEX pattern to parse information
                     pattern = r"(.+?)(?=\s\d\.\d)(?:\s\d\.\d)([A-Za-z\+\-]{2})"
                     #Find if it matches store in matches
-                    matches = re.findall(pattern, new_string)
+                    matches = re.findall(pattern, line)
 
                     #print Output to terminal
                     #Note implent return to app perhaps store in a var that can be returned to App.
@@ -55,11 +59,5 @@ def pdf_from_App(file):
                         print(f"Course: {course.replace(' ','')} Grade: {grade.strip()}")  
         i += 1
 
-    # create a page object
-    #pageObj = pdfR.getPage(0)
 
-    #extract the text
-    #print(pageObj.extractText())
-
-    #close the file object
-    #pdfObject.close()
+pdf_from_App(f)

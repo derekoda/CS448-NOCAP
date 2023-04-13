@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 from flask import *
 import htmlScraper
 from jinja2 import *
+import staticFlowChart as flow
 #from flask_wtf import *
 #sfrom wtforms import *
 
@@ -38,7 +39,17 @@ def courseplanning():
 def degreeflow():
     return render_template("degreeflow.html")
 
-#This route is used to handle the HTML upload from the client side
+@app.route('/course', methods=['GET'])
+def findCourseInfo():
+
+    courseName = request.args.get("id")
+    print()
+    print("course name: " + courseName)
+
+    return flow.getCourseInfo(courseName)
+
+
+#This route is used to handle the PDF upload from the client side
 #The methods handled by the route are the GET and POST
 @app.route('/coursemenu', methods=['GET','POST'])
 def upload_html():

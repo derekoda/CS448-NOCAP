@@ -1,5 +1,8 @@
 # CS448-NOCAP
-
+Update---4/12--4.1.MH
+    Added comments for jinja2 use had to remodify index.html and app.py
+        example snip of jinja code for html templates for expression {% for items in list %}
+        
 Update---4/8--3.1.DO
     HTML scraper now adds all courses with proper formatting to a global list that can be accessed by the program. Created course menu page with options to see potential schedules, see list of all courses, and search for a course.
     

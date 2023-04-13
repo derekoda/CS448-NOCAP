@@ -1,30 +1,21 @@
 import sqlite3
 
 def generateSchedule(coursesTaken):
+    # establish connection to database
     connection = sqlite3.connect('courselist.db')
     cursor = connection.cursor()
 
-
-    result = cursor.execute("SELECT * FROM schedules")
-
+    # create empty set to store courses that are not in the database
     deficiencySet = set([])
 
-    for row in result:
-        for course in coursesTaken:
-            if row[1] not in course[0]:
-                deficiencySet.add(row[1])
-            if row[2] not in course[0]:
-                deficiencySet.add(row[2])
-            if row[3] not in course[0]:
-                deficiencySet.add(row[3])
-            if row[4] not in course[0]:
-                deficiencySet.add(row[4])
-
-    print(coursesTaken)   
-    print('\n-----------------\n')
-    print(deficiencySet)
-
-
-    #return (set(result.fetchall()) & set(coursesTaken))
+    # iterate through courses taken, find schedules that don't contain those courses
+    for course in coursesTaken:
+        result = cursor.execute(f"SELECT * FROM schedules WHERE course1 = \'{course[0]}\' OR course2 = \'{course[0]}\' OR course3 = \'{course[0]}\' OR course4 = \'{course[0]}\'")
+        if result.fetchall() is not None:
+            print(result.fetchone())
+            deficiencySet.add(result.fetchone())
+    
+    # return the set of schedules that don't contain the courses taken
+    return str(deficiencySet)
 
     

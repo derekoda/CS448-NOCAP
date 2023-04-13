@@ -74,19 +74,16 @@ def upload_html():
             global course_list
             course_list = htmlScraper.htmlScraper(student_audit)
     
-    print(scheduleGen.generateSchedule(course_list))
-    return render_template('coursemenu.html')
 
-@app.route('/coursemenu', methods=['GET','POST'])
-def course_menu():
-    
-    print(schedule.generateSchedule(course_list))
-
-    return render_template('coursemenu.html')
+    return render_template('schedule.html')
 
 @app.route('/schedule', methods=['GET','POST'])
 def schedule():
-    return render_template('schedule.html')
+    courseSched1 = request.args.get("sched1")
+    courseSched2 = request.args.get("sched2")
+    scheduleList = scheduleGen.generateSchedule(course_list)
+    return scheduleList
+
 
 if __name__ == '__main__':
     app.run(debug=True)

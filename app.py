@@ -4,12 +4,13 @@ from flask import *
 import htmlScraper
 from jinja2 import * #Template framework for Flask to manipulate html data client side.
 import staticFlowChart as flow
+import scheduleGenerator as schedule
 #from flask_wtf import *
 #sfrom wtforms import *
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
-app.config['UPLOAD_EXTENSIONS'] = ['.pdf']
+app.config['UPLOAD_EXTENSIONS'] = ['.html']
 app.config['UPLOAD_PATH'] = 'uploads'
     
 # Routes used to render a HTML file that can be edited in the templates folder.
@@ -72,16 +73,16 @@ def upload_html():
             #sends to the scraper and stores it in a variable
             global course_list
             course_list = htmlScraper.htmlScraper(student_audit)
-        
-        #return the parsed data to the client
-        #return render_template('upload-pdf.html', parsed=course_list)
-        #return 'Student status is: ' + student_status + ' and major is: ' + student_major + ' and courses taken are: ' + str(course_list)
 
     return render_template('coursemenu.html')
 
 @app.route('/coursemenu', methods=['GET','POST'])
 def course_menu():
     return render_template('coursemenu.html')
+
+@app.route('/schedule', methods=['GET','POST'])
+def schedule():
+    return render_template('schedule.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -2,6 +2,7 @@ import os
 from werkzeug.utils import secure_filename
 from flask import *
 import htmlScraper
+from jinja2 import *
 #from flask_wtf import *
 #sfrom wtforms import *
 
@@ -13,7 +14,8 @@ app.config['UPLOAD_PATH'] = 'uploads'
 # Routes used to render a HTML file that can be edited in the templates folder.
 @app.route('/')
 def index():
-    return render_template("index.html")
+    name = "Manny"
+    return stream_template('index.html', name = name)
 
 @app.route('/index')
 def index_redirect():

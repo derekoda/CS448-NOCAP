@@ -4,7 +4,7 @@ from flask import *
 import htmlScraper
 from jinja2 import * #Template framework for Flask to manipulate html data client side.
 import staticFlowChart as flow
-import scheduleGenerator as schedule
+import scheduleGenerator as scheduleGen
 #from flask_wtf import *
 #sfrom wtforms import *
 
@@ -73,11 +73,15 @@ def upload_html():
             #sends to the scraper and stores it in a variable
             global course_list
             course_list = htmlScraper.htmlScraper(student_audit)
-
+    
+    print(scheduleGen.generateSchedule(course_list))
     return render_template('coursemenu.html')
 
 @app.route('/coursemenu', methods=['GET','POST'])
 def course_menu():
+    
+    print(schedule.generateSchedule(course_list))
+
     return render_template('coursemenu.html')
 
 @app.route('/schedule', methods=['GET','POST'])

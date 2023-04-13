@@ -2,7 +2,7 @@ import os
 from werkzeug.utils import secure_filename
 from flask import *
 import htmlScraper
-from jinja2 import *
+from jinja2 import * #Template framework for Flask to manipulate html data client side.
 import staticFlowChart as flow
 #from flask_wtf import *
 #sfrom wtforms import *
@@ -15,8 +15,9 @@ app.config['UPLOAD_PATH'] = 'uploads'
 # Routes used to render a HTML file that can be edited in the templates folder.
 @app.route('/')
 def index():
-    name = "Manny"
-    return stream_template('index.html', name = name)
+    name = "Manny"#Example jinja2 varaible passed to html via the return statement
+    return stream_template('index.html', name = name)# Here you have two arguments the template being passed and the variable, 
+                                                     # name = <- addresses the name in app while ->  = name in html template. 
 
 @app.route('/index')
 def index_redirect():

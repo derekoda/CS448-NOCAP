@@ -73,14 +73,12 @@ def upload_html():
             #sends to the scraper and stores it in a variable
             global course_list
             course_list = htmlScraper.htmlScraper(student_audit)
-    
+        scheduleList = scheduleGen.generateSchedule(course_list)
 
     return render_template('schedule.html')
 
 @app.route('/schedule', methods=['GET','POST'])
 def schedule():
-    courseSched1 = request.args.get("sched1")
-    courseSched2 = request.args.get("sched2")
     scheduleList = scheduleGen.generateSchedule(course_list)
     return scheduleList
 

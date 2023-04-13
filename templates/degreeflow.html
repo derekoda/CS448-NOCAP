@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 
-    {% block content %}
-    <!--<script src="scripts.js"></script>-->
-    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
-    <div class="page-title">
-        <h1>Default Degree Plan</h1>
-        <h2></h2>
-    </div>
+{% block content %}
+<!--<script src="scripts.js"></script>-->
+<script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+<div class="page-title">
+    <h1>Default Degree Plan</h1>
+    <h2></h2>
+</div>
 
-    <div class="chart-container-bs">
+<div class="chart-container-bs">
+    <div class="column">
         <h1 class="level-1-box">Bachelor of Science</h1>
         <ol class="level-2-wrapper">
             <li>
@@ -18,23 +19,23 @@
                         <h3 class="level-3-box">Semester 1</h3>
                         <ol class="level-4-wrapper">
                             <li>
-                                <h4 class="level-4-box" onclick="myFunction()" id="172">CS 172</h4>
+                                <h4 class="level-4-box" data-course-id="CS172">CS 172</h4>
                             </li>
                             <script>
 
                             </script>
                             <li>
-                                <h4 class="level-4-box" id="1110G">ENGL 1110G</h4>
+                                <h4 class="level-4-box" id="1110G" data-course-id="ENGL1110G">ENGL 1110G</h4>
                             </li>
                             <li>
                                 <h4 class="level-4-box" id="1511G">MATH 1511G</h4>
                             </li>
                             <li>
-                                <h4 class="level-4-box" id="271">CS 271</h4>
+                                <h4 class="level-4-box" id="271" data-course-id="CS271">CS 271</h4>
                             </li>
-                            <h3 class="level-3-box" >Semester 2</h3>
+                            <h3 class="level-3-box">Semester 2</h3>
                             <li>
-                                <h4 class="level-4-box" id="273">CS 273</h4>
+                                <h4 class="level-4-box" id="273" data-course-id="CS273">CS 273</h4>
                             </li>
                             <li>
                                 <h4 class="level-4-box" id="1521">MATH 1521 or 1521H</h4>
@@ -51,10 +52,10 @@
                         <h3 class="level-3-box">Semester 1</h3>
                         <ol class="level-4-wrapper">
                             <li>
-                                <h4 class="level-4-box" id="272">CS 272</h4>
+                                <h4 class="level-4-box" id="272" data-course-id="CS272">CS 272</h4>
                             </li>
                             <li>
-                                <h4 class="level-4-box" id="278">CS 278</h4>
+                                <h4 class="level-4-box" id="278" data-course-id="CS278">CS 278</h4>
                             </li>
                             <li>
                                 <h4 class="level-4-box" id="1115G">COMM 1115G</h4>
@@ -64,10 +65,10 @@
                             </li>
                             <h3 class="level-3-box">Semester 2</h3>
                             <li>
-                                <h4 class="level-4-box">CS 370</h4>
+                                <h4 class="level-4-box" data-course-id="CS370" >CS 370</h4>
                             </li>
                             <li>
-                                <h4 class="level-4-box" id="372">CS 372</h4>
+                                <h4 class="level-4-box" id="372" data-course-id="CS372">CS 372</h4>
                             </li>
                             <li>
                                 <h4 class="level-4-box" id="2415">MATH 2415 or 480</h4>
@@ -89,10 +90,10 @@
                         <h3 class="level-3-box">Semester 1</h3>
                         <ol class="level-4-wrapper">
                             <li>
-                                <h4 class="level-4-box" id="371">CS 371</h4>
+                                <h4 class="level-4-box" id="371" data-course-id="CS371">CS 371</h4>
                             </li>
                             <li>
-                                <h4 class="level-4-box" id="471">CS 471</h4>
+                                <h4 class="level-4-box" id="471" data-course-id="CS471">CS 471</h4>
                             </li>
                             <li>
                                 <h4 class="level-4-box" id="MElec">MATH Elective</h4>
@@ -102,12 +103,12 @@
                             </li>
                             <h3 class="level-3-box">Semester 2</h3>
                             <li>
-                                <h4 class="level-4-box" id="482">CS 482</h4>
+                                <h4 class="level-4-box" id="482" data-course-id="CS482">CS 482</h4>
                             </li>
                             <li>
                                 <h4 class="level-4-box" id="CSElec">CS Upper Elective</h4>
                             </li>
-                            
+
                             <li>
                                 <h4 class="level-4-box" id="LabSci">Lab Science Elective 2</h4>
                             </li>
@@ -120,10 +121,10 @@
                         <h3 class="level-3-box">Semester 1</h3>
                         <ol class="level-4-wrapper">
                             <li>
-                                <h4 class="level-4-box" id="448">CS 448 or 449</h4>
+                                <h4 class="level-4-box" id="448" data-course-id="CS448">CS 448 or 449</h4>
                             </li>
                             <li>
-                                <h4 class="level-4-box" id="419">CS 419</h4>
+                                <h4 class="level-4-box" id="419" data-course-id="CS419">CS 419</h4>
                             </li>
                             <li>
                                 <h4 class="level-4-box" id="LabSci">Lab Sci Elective</h4>
@@ -133,12 +134,12 @@
                             </li>
                             <h3 class="level-3-box">Semester 2</h3>
                             <li>
-                                <h4 class="level-4-box" id="474">CS 474</h4>
+                                <h4 class="level-4-box" id="474" data-course-id="CS474">CS 474</h4>
                             </li>
                             <li>
-                                <h4 class="level-4-box" id="372">CS 372</h4>
+                                <h4 class="level-4-box" id="372" data-course-id="CS372">CS 372</h4>
                             </li>
-                        
+
                             <li>
                                 <h4 class="level-4-box" id="HiElec">Upper Elective</h4>
                             </li>
@@ -148,6 +149,11 @@
             </li>
         </ol>
     </div>
+</div>
+<div class="column">
 
-        
-    {% endblock %}
+    <div id="dialog"></div>
+</div>
+
+
+{% endblock %}

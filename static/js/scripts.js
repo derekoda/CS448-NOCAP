@@ -20,3 +20,42 @@ function myFunction(){
 
   }
 
+  $(document).ready(function () {
+    // Get a reference to the dialog box
+    var dialog = $("#dialog");
+
+    // Hide the dialog box by default
+    dialog.hide();
+
+    // Add a mouseover event listener to each course heading
+    $(".level-4-box").mouseover(function () {
+        // Get the course ID from the data attribute
+        var courseId = $(this).data("course-id");
+
+        // Send an AJAX request to the server to get the course info
+        $.ajax({
+            url: "/get_course_info?course_id=" + courseId,
+            method: "GET",
+            data: { course_id: courseId },
+            success: function (response) {
+                // Set the dialog box content to the course info
+                dialog.html(response.description + "<br><br>" + response.prereq);
+
+                // Show the dialog box
+                dialog.show();
+            },
+            error: function (xhr, status, error) {
+                console.error("Error loading course info: " + error);
+            }
+        });
+    });
+
+    // Add a mouseout event listener to hide the dialog box when the user moves the mouse away from a course heading
+    $(".level-4-box").mouseout(function () {
+        dialog.hide();
+    });
+});
+
+
+
+

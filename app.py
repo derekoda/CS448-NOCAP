@@ -75,13 +75,17 @@ def upload_html():
             course_list = htmlScraper.htmlScraper(student_audit)
         scheduleList = scheduleGen.generateSchedule(course_list)
 
-    return render_template('schedule.html')
+    # call generateSchedule function with list of courses taken
+    deficiencySet = scheduleGen.generateSchedule(course_list)
+    
+    print (deficiencySet)
+    # render deficiency set in template
+    return render_template('schedule.html', deficiencySet=deficiencySet)
 
 @app.route('/schedule', methods=['GET','POST'])
 def schedule():
-    scheduleList = scheduleGen.generateSchedule(course_list)
-    return scheduleList
 
+    return render_template('schedule.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

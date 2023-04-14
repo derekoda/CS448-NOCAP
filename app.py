@@ -59,14 +59,14 @@ def get_course_info():
     connection = sqlite3.connect('courselist.db')
     cursor = connection.cursor()
     #Query command to pull data from db
-    cursor.execute('SELECT description, prereq FROM course_list WHERE id = ?', (course_id,))
+    cursor.execute('SELECT name, description, prereq FROM course_list WHERE id = ?', (course_id,))
     #get the first result from the query and store it.
     row = cursor.fetchone()
     connection.close()
     #If it exists toss it at the client else barf undefined
     if row:
-        description, prereq = row
-        return jsonify({'description': description, 'prereq': prereq})
+        name, description, prereq = row
+        return jsonify({'name':name,'description': description, 'prereq': prereq})
     else:
         return jsonify({'error': f'Course with id {course_id} not found'})
 

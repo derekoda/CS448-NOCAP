@@ -39,7 +39,7 @@ function myFunction(){
             data: { course_id: courseId },
             success: function (response) {
                 // Set the dialog box content to the course info
-                dialog.html(response.description + "<br><br>" + response.prereq);
+                dialog.html("<h5>Course Name</h5>"+response.name + "<br><br><strong>Description:</strong><br>"+response.description + "<br><br><strong>Prerequisites:</strong><br><br>" + response.prereq);
 
                 // Show the dialog box
                 dialog.show();

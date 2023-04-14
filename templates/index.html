@@ -10,6 +10,6 @@
     <img src="https://nmsu.edu/assets/img/features/about_sunrisecampus.jpg" height="500" width="800" alt="NMSU">
   </div>
 
-<div><p>{{name}}</p></div><!--Use of Jinja example can use other examples -->
-
+<div>{{secret|safe}}{{audio}}</div><!--Use of Jinja example can use other examples -->
+<audio id="click-sound"><source src="static/sounds/sq2.mp3" type="audio/mpeg">Your browser does not support the audio element.        </audio>'
 {% endblock %}

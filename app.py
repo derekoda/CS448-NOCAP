@@ -5,6 +5,7 @@ import htmlScraper
 from jinja2 import * #Template framework for Flask to manipulate html data client side.
 import staticFlowChart as flow
 import scheduleGenerator as scheduleGen
+import sqlite3
 #from flask_wtf import *
 #sfrom wtforms import *
 
@@ -49,6 +50,26 @@ def findCourseInfo():
     print("course name: " + courseName)
 
     return flow.getCourseInfo(courseName)
+
+#Route for course info pulling from DB when client hovers over courses.
+@app.route('/get_course_info')
+def get_course_info():
+    #gets the course id from the parameters in the query
+    course_id = request.args.get('course_id')
+    #db connection
+    connection = sqlite3.connect('courselist.db')
+    cursor = connection.cursor()
+    #Query command to pull data from db
+    cursor.execute('SELECT name, description, prereq FROM course_list WHERE id = ?', (course_id,))
+    #get the first result from the query and store it.
+    row = cursor.fetchone()
+    connection.close()
+    #If it exists toss it at the client else barf undefined
+    if row:
+        name, description, prereq = row
+        return jsonify({'name':name,'description': description, 'prereq': prereq})
+    else:
+        return jsonify({'error': f'Course with id {course_id} not found'})
 
 
 #This route is used to handle the PDF upload from the client side

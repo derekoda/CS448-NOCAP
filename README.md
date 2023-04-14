@@ -1,4 +1,11 @@
 # CS448-NOCAP
+Update---4/13//4.3.MH  
+    Fixed div CSS on degreeflow it now populates centered with a rounded border.
+Update---4/13--4.2.MH
+    Added course description and prereq pull from DB in degreeflow page. Created JS with ajax added link to ajax in base.html 
+        Created a route to send information to the client side. Implemented div columns to display course info next to flowchart.
+        Broke CSS im not good at making things look pretty.
+
 Update---4/12--4.1.MH
     Added comments for jinja2 use had to remodify index.html and app.py
         example snip of jinja code for html templates for expression {% for items in list %}

@@ -1,6 +1,4 @@
 // The following are scripts used as interactions on the front end
-
-
 function myFunction(){
 
     const xhttp = new XMLHttpRequest();
@@ -55,6 +53,14 @@ function myFunction(){
         dialog.hide();
     });
 });
+
+function playSound() {
+  // Create an audio element and set its source to the sound file
+  var audio = new Audio('');
+  // Play the audio file
+  audio.play();
+}
+
 
 
 

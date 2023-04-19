@@ -29,19 +29,19 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Home</a>
+              <a class="nav-link{% if request.path == url_for('index') %} active{% endif %}" href="{{ url_for('index') }}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('about') }}">About</a>
+              <a class="nav-link{% if request.path == url_for('about') %} active{% endif %}" href="{{ url_for('about') }}">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('courseplanning') }}">Course Planning</a>
+              <a class="nav-link{% if request.path == url_for('courseplanning') %} active{% endif %}" href="{{ url_for('courseplanning') }}">Course Planning</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('degreeflow') }}">Degree Flowchart</a>
+              <a class="nav-link{% if request.path == url_for('degreeflow') %} active{% endif %}" href="{{ url_for('degreeflow') }}">Degree Flowchart</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+              <a class="nav-link{% if request.path == url_for('contact') %} active{% endif %}" href="{{ url_for('contact') }}">Contact</a>
             </li>
           </ul>
           <form class="d-flex" role="search">
@@ -51,6 +51,7 @@
         </div>
       </div>
     </nav>
+    
 
 
 {% block content%}

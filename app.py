@@ -17,18 +17,21 @@ app.config['UPLOAD_PATH'] = 'uploads'
 # Routes used to render a HTML file that can be edited in the templates folder.
 @app.route('/')
 def index():
+    secret = '<a onclick="setTimeout(function(){location.href=\'https://wallpapercave.com/wp/wp5280203.png\';},1000);"><img src="static/img/tentacles-removebg-preview.png" alt="Example"></a>'
+
     name = "Manny"#Example jinja2 varaible passed to html via the return statement
-    return stream_template('index.html', name = name)# Here you have two arguments the template being passed and the variable, 
+    return render_template('index.html', page='index', secret=secret)# Here you have two arguments the template being passed and the variable, 
                                                      # name = <- addresses the name in app while ->  = name in html template. 
 
 @app.route('/index')
 def index_redirect():
-    name = "Manny"
-    return Flask.redirect(url_for('index',name))
+    secret = '<a href="https://wallpapercave.com/wp/wp5280203.png"><img src="static/img/tentacles-removebg-preview.png" alt="Example"></a>'
+
+    return redirect(url_for('index',page='index',secret=secret))
 
 @app.route('/about')
 def about():
-    return render_template("about.html")
+    return render_template("about.html",page='about')
 
 @app.route('/contact')
 def contact():
@@ -36,11 +39,11 @@ def contact():
 
 @app.route('/courseplanning')
 def courseplanning():
-    return render_template('courseplanning.html')
+    return render_template('courseplanning.html',page='courseplanning')
     
 @app.route('/degreeflow')
 def degreeflow():
-    return render_template("degreeflow.html")
+    return render_template("degreeflow.html",page='degreeflow')
 
 @app.route('/course', methods=['GET'])
 def findCourseInfo():
@@ -101,12 +104,12 @@ def upload_html():
     
     print (deficiencySet)
     # render deficiency set in template
-    return render_template('schedule.html', deficiencySet=deficiencySet)
+    return render_template('schedule.html', deficiencySet=deficiencySet, page='coursemenu')
 
 @app.route('/schedule', methods=['GET','POST'])
 def schedule():
 
-    return render_template('schedule.html')
+    return render_template('schedule.html',page='schedule')
 
 if __name__ == '__main__':
     app.run(debug=True)

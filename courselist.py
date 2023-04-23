@@ -3,23 +3,23 @@ import sqlite3
 connection = sqlite3.connect('courselist.db')
 cursor = connection.cursor()
 
-cursor.execute("""CREATE TABLE IF NOT EXISTS schedules (
-                schedule_id text,
-                course1 text,
-                course2 text,
-                course3 text,
-                course4 text);""")
+# cursor.execute("""CREATE TABLE IF NOT EXISTS schedules (
+#                 schedule_id text,
+#                 course1 text,
+#                 course2 text,
+#                 course3 text,
+#                 course4 text);""")
 
-schedules = [
-    ('1', 'CS172', 'ENGL1110G', 'MATH1511G', 'Lab Science'),
-    ('2', 'CS271', 'CS273', 'MATH1511G', 'Lab Science'),
-    ('3', 'CS271', 'CS273', 'MATH1521G', 'Lab Science'),
-    ('4', 'CS272', 'CS278', 'COMM1115G', 'ENGL2210G'),
-    ('5', 'CS272', 'CS370', 'COMM1115G', 'ENGL2210G'),
-    ('6', 'CS278', 'CS370', 'COMM1115G', 'ENGL2210G'),
-    ('7', 'CS278', 'CS371', 'COMM1115G', 'AST311'),
-    ('8', 'CS278', 'CS371', 'MATH2415', 'AST311')
-]
+# schedules = [
+#     ('1', 'CS172', 'ENGL1110G', 'MATH1511G', 'Lab Science'),
+#     ('2', 'CS271', 'CS273', 'MATH1511G', 'Lab Science'),
+#     ('3', 'CS271', 'CS273', 'MATH1521G', 'Lab Science'),
+#     ('4', 'CS272', 'CS278', 'COMM1115G', 'ENGL2210G'),
+#     ('5', 'CS272', 'CS370', 'COMM1115G', 'ENGL2210G'),
+#     ('6', 'CS278', 'CS370', 'COMM1115G', 'ENGL2210G'),
+#     ('7', 'CS278', 'CS371', 'COMM1115G', 'AST311'),
+#     ('8', 'CS278', 'CS371', 'MATH2415', 'AST311')
+# ]
     
 cursor.execute("""CREATE TABLE IF NOT EXISTS course_list (
                 id text, 
@@ -71,7 +71,7 @@ course_list = [
     ('LabScience', 'Lab Science', 4, 'This is a placeholder for a general lab science course requirement. It could be Biology, Geology, Astronomy, Physics, Etc.', 'None', 'FA23, SP24, FA24, SP25'),
     ('VWW', 'Viewing a Wider World', 3, 'This is a placeholder for any course the university considers \'Viewing a Wider World\'', 'None', 'FA23, SP24, FA24, SP25')]
     
-cursor.executemany('INSERT INTO schedules VALUES (?,?,?,?,?)', schedules)
+# cursor.executemany('INSERT INTO schedules VALUES (?,?,?,?,?)', schedules)
 cursor.executemany('INSERT INTO course_list VALUES (?,?,?,?,?,?)', course_list)
 connection.commit()
 

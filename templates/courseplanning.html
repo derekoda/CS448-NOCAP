@@ -33,6 +33,16 @@
           </select>
         </div>
         <div class="questionnaire">
+          <label for="semesterInput" class="form-label">Next semester:<br></label>
+          <select class="form-select" id="semesterInput" name="semester">
+            <option selected>Choose...</option>
+            <option value="FA23">Fall '23</option>
+            <option value="SP24">Spring '24</option>
+            <option value="FA24">Fall '24</option>
+            <option value="SP25">Spring '25</option>
+          </select>
+        </div>
+        <div class="questionnaire">
           <label class="form-label" for="customFile">Upload your STAR Audit (HTML format):</label>
           <input type="file" class="form-control" id="customFile" name="audit" type=".html"/> 
           <button class="btn btn-primary" type="submit" style="background-color: #852135;">Submit</button>

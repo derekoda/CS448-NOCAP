@@ -74,6 +74,7 @@ cursor = connection.cursor()
 # cursor.executemany('INSERT INTO schedules VALUES (?,?,?,?,?)', schedules)
 # cursor.executemany('INSERT INTO course_list VALUES (?,?,?,?,?,?)', course_list)
 
+cursor.execute('INSERT INTO schedules VALUES (?,?,?,?,?)', ('13', 'CS370', 'CS278', 'VWW', 'LabScience'))
 
 connection.commit()
 

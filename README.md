@@ -1,4 +1,6 @@
 # CS448-NOCAP
+Update---4/29 - 5/1.1MH 
+    Started working on scrapping requirements from the html file to be able to generate a schedule for the student.
 Update---4/13//4.3.MH  
     Fixed div CSS on degreeflow it now populates centered with a rounded border.
     

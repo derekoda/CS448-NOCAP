@@ -18,6 +18,8 @@ function myFunction(){
 
   }
 
+  var prereqClassArray
+
   $(document).ready(function () {
     // Get a reference to the dialog box
     var dialog = $("#dialog");
@@ -36,6 +38,22 @@ function myFunction(){
             method: "GET",
             data: { course_id: courseId },
             success: function (response) {
+
+                if(response.prereq) {
+                  console.log(response.prereq);
+
+
+                  prereqClassArray = response.prereq.split(', ');
+                  console.log(`Array: ${prereqClassArray}`);
+                  for(let i =0; i < prereqClassArray.length; i++) {
+
+                    console.log(`Element at i: ${prereqClassArray[i]}`)
+                    document.getElementById(prereqClassArray[i]).style.backgroundColor = 'green';
+                  }
+
+                }
+
+
                 // Set the dialog box content to the course info
                 dialog.html("<h5>Course Name</h5>"+response.name + "<br><br><strong>Description:</strong><br>"+response.description + "<br><br><strong>Prerequisites:</strong><br><br>" + response.prereq);
 
@@ -51,7 +69,13 @@ function myFunction(){
     // Add a mouseout event listener to hide the dialog box when the user moves the mouse away from a course heading
     $(".level-4-box").mouseout(function () {
         dialog.hide();
+        for(let i =0; i < prereqClassArray.length; i++) {
+
+          console.log(`Element at i: ${prereqClassArray[i]}`)
+          document.getElementById(prereqClassArray[i]).style.backgroundColor = '#9c1f32';
+        }
     });
+
 });
 
 function playSound() {

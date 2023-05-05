@@ -102,7 +102,7 @@ def upload_html():
     # call generateSchedule function with list of courses taken
     deficiencySet = scheduleGen.generateSchedule(course_list)
     
-    print (deficiencySet)
+    #print (deficiencySet)
     # render deficiency set in template
     return render_template('schedule.html', deficiencySet=deficiencySet, page='coursemenu')
 

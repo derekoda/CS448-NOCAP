@@ -1,21 +1,29 @@
 from bs4 import BeautifulSoup
 import html5lib
 import re #used for matching any number or text on the html 
+import scheduleGenerator as gene
 
 # htmlScraper takes in a string of html and returns a string of text
 def htmlScraper(html):
     soup = BeautifulSoup(html, 'html5lib')
 
     #Regex matches any class with the string matching the html class
-    regex = re.compile(r'requirement\s+S(.*)')
+    regex = re.compile(r'requirement\s+Status_OK(.*)')#Regex used to capture completed requirements
+    regex2 = re.compile(r'requirement\s+Status_NO(.*)')#Regex used to capture the none completed requirements
+
 
     # find all elements with class 'takenCourse' and store them in a list
-    course_elements = soup.find_all('tr', class_='takenCourse')
-    course_req_ele = soup.find_all('div', class_=regex)
+    course_elements = soup.find_all('tr', class_='takenCourse')#To find all courses taken
+    course_req_Completed = soup.find_all('div', class_=regex)#To find blocks with completed requirements
+    course_req_not_completed = soup.findAll('div', class_=regex2)#To find blocks for incomplete requirements
+
     # create a list of lists to store the course, description, and grade
     global course_list 
     course_list = []
-    course_req = []
+
+    #List for storing incomplete requirements
+    course_req_list = []
+    
     # iterate through the list of course elements and print the course and description
     for course_element in course_elements:
         course = course_element.find('td', class_='course')
@@ -25,35 +33,81 @@ def htmlScraper(html):
         # append the course, description,    course_elements = soup.find_all('tr', class_='takenCourse')
         course_list.append([course.text.strip().replace(' E', '').replace(' ', ''), description.text.strip().split('CONVERTED',1)[0].strip(), grade.text.strip()])
         
-    #Iterate through the degree requirements    
-    for element in course_req_ele:
-        #Getting the header of the div for course credit hours purposes
-        requiredHeader = element.find('div', class_='reqTitle')
-        
-        print(requiredHeader)
-      
-        #Any already taken courses that have been passed
-        completed_Course = element.find('tr', class_='takenCourse')
-        print(completed_Course)
-        #Now within the taken course check if the courseID was changed and set it to a variable
-        if completed_Course != None: 
-            for element2 in completed_Course:
-                print("IN Loop 2")
-                print(element2)
-                completed_Description= element2.find('td', class_='descLine')
-                #If completed_Description matches string "CONVERTED TO: swap names"
-                if "CONVERTED TO:" in completed_Description:
-                    new_course_name = element2.find('td', class_='course')
-                    new_course_name = completed_Description
+
+    #This piece of code will iterate through the block that have unmet requirements and 
+    #    attach them to the course_req_list which will then be passed to the scheduler
+    #    to process the potential schedule for the student.
+    for not_complete in course_req_not_completed:
+        check_for_VWW = not_complete.find('div',class_='reqTitle').text
+
+    #This if statement well check the VWW block if there is a course completed it add it to the list of completed
+    #Else it is assumed this block is not complete and has no courses to add.
+        if 'Viewing a Wider World Requirement' in check_for_VWW:
+            not_VWW_Completed_name = not_complete.find('td',class_='course').text
+            not_VWW_Completed_Credits = not_complete.find('td', class_='credit').text
+            not_VWW_Completed_Description = not_complete.find('td',class_='description').text
+
+            #If in the description block the course name is change this statement will change the course name
+            if "CONVERTED TO:" in not_VWW_Completed_Description:
+                temp =[]
+                temp = not_VWW_Completed_Description.split(':')
+                not_VWW_Completed_name = temp[1]
+            #Now store in the non completed requirements array and add a second one for the missing req
+            course_req_list.append([not_VWW_Completed_name.replace(' E', '').replace(' ', '')])
+            course_req_list.append(["MISSING One VWW Course 3 Credits"])
         else:
-            continue
-        not_take_Course = element.find('span', class_='subreqTitle')
-        print(requiredHeader) 
-        print(completed_Course)
-        print(not_take_Course)
+            #This is not the VWW Block and follows a different pattern
+            #Check for all none taken courses in the block
+            courses_not_Taken_In_Block = not_complete.find_all('span', class_='subreqTitle')
+            #Now for each of these courses not taken in the block store them in the array
+            for m in courses_not_Taken_In_Block:
+                m=m.text
+                if "Take two of" in m:
+                    flag = True
+                    #Strips the empty space from the CS courses
+                    if "C S" in m:
+                        m = m.replace("C S", "CS")
+                    #Strips everything else from the texts and only captures the courseID
+                    regexPattern= r'\b[A-Z]+ ?\d{3,}[A-Z]?\b'
+                    #Remove white space
+                    matches = [x.replace(' ', '') for x in re.findall(regexPattern, m)]
+                    matches.append(2)
+                    
+                    course_req_list.append(matches)
+                    
+                 #If the requirements need two courses to complete
+                elif "Take two courses from the following:" in m:
+                    take = not_complete.find('td',class_='fromcourselist').text
+                    #Split into a list
+                    take =[cls.strip() for cls in take.split(',') if cls.strip()]
+                    #Remove all white space and remove odd C S format
+                    take= [course.replace("C S ", "") for course in take]
+                    #Add CS to courses for eval
+                    take = ['CS'+ x if x != take else x for x in take]
+                    take.append(2)
+                   
+                    course_req_list.append(take)
+                else:
+                    #Strips the empty space from the CS courses
+                    if "C S" in m:
+                        m = m.replace("C S", "CS")
+                    #Strips everything else from the texts and only captures the courseID
+                    regexPattern= r'\b[A-Z]+ ?\d{3,}[A-Z]?\b'
+                    #Remove all white space
+                    matches = [x.replace(' ', '') for x in re.findall(regexPattern, m)]
+
+                    
+                    course_req_list.append(matches)
+                
+                    
     # this is just to verify that the list is being populated correctly
     #print(*course_list, sep = '\n')   
-    #print(course_req_ele, sep ='\n')
+    #print(course_req_Completed, sep ='\n')
+    #Clean the course requirements list
+    course_req_list_reduced = [item for item in course_req_list if item]
+    for n in course_req_list_reduced:
+        print(n)
+    final_schedule = gene.generateSchedule2(course_list, course_req_list)
     return course_list
         
    

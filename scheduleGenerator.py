@@ -1,13 +1,27 @@
 import sqlite3
 
-def generateSchedule(coursesTaken):
+def generateSchedule2(coursesTaken,noTaken):
     # establish connection to database
     connection = sqlite3.connect('courselist.db')
     cursor = connection.cursor()
     cursor2 = connection.cursor()
-    print("In COURSE CREATOR!!!!!!!!!!!!")
     
-    # create empty list to store schedules that don't contain the courses taken
+    # create empty list to store schedules that don't contain the courses taken this list will be the filtered data from passed lists
+    deficiencyList = []
+    prereqList = []
+    '''Will compare both passed lists and store into another list which will this 3rd list
+        is the requirements still not met in the degree audit. The list will take into account
+        the students GPA to Avoid giving them a extremely difficult semester. The courses will be stacked in ascending order
+        when generating the schedule. And creating a schedule of 15 Credit Hours max or 5 courses.'''
+    # return the deficiency list
+    return deficiencyList
+def generateSchedule(coursesTaken):
+ # establish connection to database
+    connection = sqlite3.connect('courselist.db')
+    cursor = connection.cursor()
+    cursor2 = connection.cursor()
+    
+    # create empty list to store schedules that don't contain the courses taken this list will be the filtered data from passed lists
     deficiencyList = []
     prereqList = []
     '''Lets try something different we are getting a list with such elements
@@ -19,8 +33,7 @@ def generateSchedule(coursesTaken):
     #Retreive the data from the db
     cursor2.execute("SELECT * FROM course_list")
     rows = cursor2.fetchall()
-    #print("This is the bd Row************")
-    #print(rows)
+    
     #In theory all the data from the db which is not going to be large should be stored in the rows element
     # No we append it to the plans list with the format we had wanted to 
     #Making a list of none taken and retaking courses from the degree audit.

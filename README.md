@@ -1,4 +1,7 @@
 # CS448-NOCAP
+Update---5/5.5MH
+    HTML Scraper now captures all courses required. Then passes them to the scheduler for processing. Then sends it back to the
+    client via flask.
 Update---4/29 - 5/1.1MH 
     Started working on scrapping requirements from the html file to be able to generate a schedule for the student.
 Update---4/13//4.3.MH  

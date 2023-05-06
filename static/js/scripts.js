@@ -25,7 +25,7 @@ function myFunction(){
     var dialog = $("#dialog");
 
     // Hide the dialog box by default
-    dialog.hide();
+    //dialog.hide();
 
     // Add a mouseover event listener to each course heading
     $(".level-4-box").mouseover(function () {
@@ -48,14 +48,16 @@ function myFunction(){
                   for(let i =0; i < prereqClassArray.length; i++) {
 
                     console.log(`Element at i: ${prereqClassArray[i]}`)
-                    document.getElementById(prereqClassArray[i]).style.backgroundColor = 'green';
+                    document.getElementById(prereqClassArray[i]).style.color = '#48f44d';
+                    document.getElementById(prereqClassArray[i]).style.textShadow = '1px 1px 10px white';
+
                   }
 
                 }
 
 
                 // Set the dialog box content to the course info
-                dialog.html("<h5>Course Name</h5>"+response.name + "<br><br><strong>Description:</strong><br>"+response.description + "<br><br><strong>Prerequisites:</strong><br><br>" + response.prereq);
+                dialog.html("<h5>Course Name</h5>"+response.name + "<br><br><strong>Description:</strong><br>"+response.description + "<br><br><strong id=\"prereqID\">Prerequisites:</strong><br><br>" + response.prereq);
 
                 // Show the dialog box
                 dialog.show();
@@ -68,11 +70,12 @@ function myFunction(){
 
     // Add a mouseout event listener to hide the dialog box when the user moves the mouse away from a course heading
     $(".level-4-box").mouseout(function () {
-        dialog.hide();
+        //dialog.hide();
         for(let i =0; i < prereqClassArray.length; i++) {
 
           console.log(`Element at i: ${prereqClassArray[i]}`)
-          document.getElementById(prereqClassArray[i]).style.backgroundColor = '#9c1f32';
+          document.getElementById(prereqClassArray[i]).style.color = 'white';
+          document.getElementById(prereqClassArray[i]).style.textShadow = 'none';
         }
     });
 

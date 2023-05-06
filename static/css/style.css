@@ -1,125 +1,107 @@
-html{
-  height: 135%;
+html {
+  height: 130%;
 }
 
 .navbar {
-    background-color: #852135;
-    border: 1px solid #ffffff;
-    font-size: 30px;
+  background-color: #852135;
+  border: 1px solid #ffffff;
+  font-size: 30px;
 }
- 
-.navbar .navbar-brand{
-    color: white;
+
+.navbar .navbar-brand {
+  color: white;
 }
 .navbar img {
   border-radius: 50%;
   margin-right: 25px;
 }
 
-.page-title h1{
-    font-size: 65px;
-    text-shadow: 0 0 8px #852135;
-    width: 100%;
-    margin-bottom: 20px;
-    padding: 0 20px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.page-title h1 {
+  font-size: 65px;
+  text-shadow: 0 0 8px #852135;
+  width: 100%;
+  margin-bottom: 20px;
+  margin-left: 0%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 .homepage-content {
-    width: 100%;
-    margin-bottom: 20px;
-    padding: 0 20px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .homepage-content h1 {
-    font-size: 50px;
-    text-shadow: 0 0 8px #852135;
+  font-size: 50px;
+  text-shadow: 0 0 8px #852135;
 }
 
 .homepage-content p {
-    font-size: 25px;
+  font-size: 25px;
 }
 
 .questionnaire {
-    font-size: 30px;
-    width: 100%;
-    margin-bottom: 20px;
-    padding: 0 20px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  font-size: 30px;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .btn btn-primary {
-    background-color: #852135;
-    padding: 0;
-    border: none;
-    color: white;
+  background-color: #852135;
+  padding: 0;
+  border: none;
+  color: white;
 }
 
 .helpful-links {
-    font-size: 30px;
-    
-    width: 100%;
-    margin-bottom: 20px;
-    padding: 0 20px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  font-size: 30px;
+
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
-
-
-
-:root {
-    --level-1: #692737;
-    --level-2: #a58e63;
-    --level-3: #48608b;
-    --level-4: #9c1f32;
-    --white: rgb(255, 255, 255);
-}
-
 
 .chart-container-bs {
-    padding: 0 10px;
-    margin: 0;
-    box-sizing: border-box;
-    max-width: 1000px;
-    margin: auto;
-    height: 110%;
+  padding: 1em;
+  box-sizing: border-box;
+  max-width: 1000px;
+  margin: auto;
+  margin-left: 27%;
+  height: 110%;
 }
 
 .chart-container-bs .ol {
-    list-style: none;
+  list-style: none;
 }
 
-
-
 .level-1-box {
-    width: 60%;
-    margin: 0 auto 40px;
-    background: var(--level-1);
-    border-radius: 5%;
-    color: white;
-    text-align: center;
-    box-shadow: 0 0 8px #852135;
-  }
-
+  text-align: center;
+  margin-top: 5%;
+}
 
 .level-2-wrapper {
   position: relative;
@@ -130,68 +112,74 @@ html{
 
 .level-2-wrapper li {
   position: relative;
+  width: 100%;
 }
 
 .level-2-box {
   width: 80%;
   margin: 0 auto 40px;
-  background: var(--level-2);
-  color: white;
+  color: #83414f;
   list-style: none;
   text-align: center;
+  text-decoration: solid;
+  text-shadow: 1px 1px 4px rgb(244, 244, 244);
 }
 
-
 .level-3-wrapper {
-  position: relative;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-column-gap: 20px;
-  width: 100%;
+  grid-column-gap: 10px;
+  width: 110%;
   margin: 0 auto;
   list-style: none;
   margin-right: 10%;
 }
 
-.level-3-wrapper > li::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, -100%);
-  width: 2px;
-  height: 40px;
-  background: var(--white);
-}
-
 .level-3-box {
-  margin-bottom: 40px;
-  background: var(--level-3);
+  margin-bottom: 50px;
+  margin-top: 50px;
   text-align: center;
+  text-decoration: underline;
   margin-right: 5%;
+  padding: 1%;
 }
 
 .level-4-wrapper {
   position: relative;
   width: 100%;
+  height: 180%;
   margin-left: -2em;
   list-style: none;
   align-content: center;
 }
 
-.level-4-wrapper li + li {
-  margin-top: 20px;
-}
-
 .level-4-box {
   font-weight: normal;
+  box-shadow: #48f44d;
   margin-bottom: 15%;
   background: var(--level-4);
   text-align: center;
-  align-items: left;
   width: 110%;
   height: 110%;
 }
+
+.col {
+  width: 40em;
+  float: right;
+  position: relative;
+}
+
+#dialog {
+  position: relative;
+  margin-top: -40em;
+  margin-left: 35em;
+  width: 90%;
+}
+
+#prereqID {
+  color: #48f44d;
+}
+
 /*Columns for degree flow chart*/
 .container {
   width: 100%;
@@ -223,7 +211,7 @@ html{
   .level-2-wrapper > li::before {
     display: none;
   }
-  
+
   .level-2-wrapper,
   .level-2-wrapper::after,
   .level-2::after {

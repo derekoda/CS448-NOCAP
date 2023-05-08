@@ -1,4 +1,6 @@
 # CS448-NOCAP
+Update---5/8.2MH
+    Schedule Generator is almost complete just need to figure how to delete a list that had its requirements completed.
 Update---5/5.5MH
     HTML Scraper now captures all courses required. Then passes them to the scheduler for processing. Then sends it back to the
     client via flask.

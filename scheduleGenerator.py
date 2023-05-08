@@ -1,6 +1,10 @@
 import sqlite3
 
 def generateSchedule2(coursesTaken,noTaken):
+    #print(coursesTaken)
+    print("***************")
+    for x in noTaken:
+        print(x)
     # establish connection to database
     connection = sqlite3.connect('courselist.db')
     cursor = connection.cursor()
@@ -8,13 +12,56 @@ def generateSchedule2(coursesTaken,noTaken):
     
     # create empty list to store schedules that don't contain the courses taken this list will be the filtered data from passed lists
     deficiencyList = []
-    prereqList = []
+    filtered_list = []
+    indices_to_remove = []
+    count = 0
     '''Will compare both passed lists and store into another list which will this 3rd list
         is the requirements still not met in the degree audit. The list will take into account
         the students GPA to Avoid giving them a extremely difficult semester. The courses will be stacked in ascending order
         when generating the schedule. And creating a schedule of 15 Credit Hours max or 5 courses.'''
+    #begin filtering courses from lists
+    for index, sublist in enumerate(noTaken):
+        courses = sublist
+    
+        for  not_taken_course in courses:
+            
+            if isinstance(courses,list) and len(courses) > 1:
+                    last_element = courses[-1]
+                    if isinstance(last_element, int) and 1 <= last_element <= 2:
+                        print("The courses =", courses)
+                        count = courses.pop()
+                       
+                
+            for secondList_course in coursesTaken:
+                    if count > 0:
+                        
+                        if not_taken_course == secondList_course[0]:
+                            
+                            count = count - 1
+                            
+                            if count == 0:
+                               
+                                for i in range(len(sublist)):
+                                    sublist[i] = []
+                                sublist = [item for item in sublist if item]
+                                sublist = [[]] if not sublist else sublist
+
+                            
+                        
+                    else:
+                            #if len(sublist) > 1:
+                                
+                            if not_taken_course == secondList_course[0]:
+                                sublist.remove(not_taken_course)
+                    
+    print("**********Needed Courses**********")
+    
+    for y in noTaken: 
+        print(y)
+
+
     # return the deficiency list
-    return deficiencyList
+    return filtered_list
 def generateSchedule(coursesTaken):
  # establish connection to database
     connection = sqlite3.connect('courselist.db')

@@ -21,39 +21,42 @@ def generateSchedule2(coursesTaken,noTaken):
         when generating the schedule. And creating a schedule of 15 Credit Hours max or 5 courses.'''
     #begin filtering courses from lists
     for index, sublist in enumerate(noTaken):
-        courses = sublist
-    
-        for  not_taken_course in courses:
-            
-            if isinstance(courses,list) and len(courses) > 1:
-                    last_element = courses[-1]
-                    if isinstance(last_element, int) and 1 <= last_element <= 2:
-                        print("The courses =", courses)
-                        count = courses.pop()
-                       
-                
-            for secondList_course in coursesTaken:
-                    if count > 0:
-                        
-                        if not_taken_course == secondList_course[0]:
-                            
-                            count = count - 1
-                            
-                            if count == 0:
-                               
-                                for i in range(len(sublist)):
-                                    sublist[i] = []
-                                sublist = [item for item in sublist if item]
-                                sublist = [[]] if not sublist else sublist
+        # stores the first iteratin of the enumerated noTaken list into courses
+        #courses = sublist
+        print("Print sublist=" , sublist)
+        #for each list of courses check each course individually
+        for  element_in_sublist in sublist:
+            #means this is just a one course
+            if len(sublist) == 1:
+                for taken_element in coursesTaken:
+                    if element_in_sublist == taken_element[0]:
+                        sublist.remove(taken_element[0])
 
-                            
-                        
-                    else:
-                            #if len(sublist) > 1:
-                                
-                            if not_taken_course == secondList_course[0]:
-                                sublist.remove(not_taken_course)
-                    
+            if len(sublist) > 1:
+                #This means this list has a tailing number and needs one or more requirements
+                if sublist[-1] == 1 or sublist[-1] == 2:
+                    counter = sublist[-1]#store the last element as a counter
+                    print(sublist[-1])
+                    sublist.pop()
+                    for taken_element in coursesTaken:
+                        if element_in_sublist == taken_element[0]:
+                            counter -= 1
+                        elif element_in_sublist != taken_element[0]:
+                            continue
+                        if counter == 0:# all requirements met erase the list
+                            sublist.clear()
+                elif sublist[-1] != 1 and sublist[-1] != 2:
+                    for taken_element in coursesTaken:
+                        if element_in_sublist == taken_element[0]:
+                            sublist.clear()# clean the list course matched
+                            break
+                        else:
+                            continue
+
+
+            #If the list is a requirement that needs 1 or 2 to complete 
+            #check that its a list and its length is greater than 1
+            
     print("**********Needed Courses**********")
     
     for y in noTaken: 
@@ -62,6 +65,7 @@ def generateSchedule2(coursesTaken,noTaken):
 
     # return the deficiency list
     return filtered_list
+
 def generateSchedule(coursesTaken):
  # establish connection to database
     connection = sqlite3.connect('courselist.db')

@@ -97,10 +97,10 @@ def upload_html():
             #sends to the scraper and stores it in a variable
             global course_list
             course_list = htmlScraper.htmlScraper(student_audit)
-        scheduleList = scheduleGen.generateSchedule(course_list)
+        #scheduleList = scheduleGen.generateSchedule(course_list)
 
     # call generateSchedule function with list of courses taken
-    deficiencySet = scheduleGen.generateSchedule(course_list)
+    deficiencySet = course_list#scheduleGen.generateSchedule(course_list)
     
     #print (deficiencySet)
     # render deficiency set in template

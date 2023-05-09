@@ -28,11 +28,25 @@ def htmlScraper(html):
     for course_element in course_elements:
         course = course_element.find('td', class_='course')
         grade = course_element.find('td', class_='grade')
-        description = course_element.find('td', class_='description')
+        description = course_element.find('td', class_='description').text
         
-        # append the course, description,    course_elements = soup.find_all('tr', class_='takenCourse')
-        course_list.append([course.text.strip().replace(' E', '').replace(' ', ''), description.text.strip().split('CONVERTED',1)[0].strip(), grade.text.strip()])
+        if "IP" in grade.text:
         
+            course_list.append([course.text.strip().replace(' E', '').replace(' ', ''), description.strip().split('CONVERTED', 1)[0].strip(), grade.text.strip()])
+
+        elif grade.text >= 'D' and grade.text != 'IP':
+            continue
+        else:
+            if description is not None:  # Check if description is not None
+                # Process description if it exists
+                if "CONVERTED TO:" in description:
+                    temp = []
+                    temp = description.split(':')
+                    course_new = temp[1].strip()
+                    course_list.append([course_new.strip().replace(' E', '').replace(' ', ''), description.replace('\t', "").replace('\n',""), grade.text.strip()])
+                else:
+                    course_list.append([course.text.strip().replace(' E', '').replace(' ', ''), description.strip().split('CONVERTED', 1)[0].strip(), grade.text.strip()])
+
 
     #This piece of code will iterate through the block that have unmet requirements and 
     #    attach them to the course_req_list which will then be passed to the scheduler
@@ -99,15 +113,15 @@ def htmlScraper(html):
                     
                     course_req_list.append(matches)
                 
-                    
+    #print("Taken Courses")         
     # this is just to verify that the list is being populated correctly
-    #print(*course_list, sep = '\n')   
-    #print(course_req_Completed, sep ='\n')
+    print(*course_list, sep = '\n')   
+    print("***********************")
+ 
     #Clean the course requirements list
     course_req_list_reduced = [item for item in course_req_list if item]
-    for n in course_req_list_reduced:
-        print(n)
-    final_schedule = gene.generateSchedule2(course_list, course_req_list)
-    return course_list
+
+    final_schedule = gene.generateSchedule2(course_list, course_req_list_reduced)
+    return final_schedule
         
    

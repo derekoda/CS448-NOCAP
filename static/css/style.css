@@ -1,5 +1,7 @@
 html {
   height: 130%;
+  font-family: "Montserrat", sans-serif;
+  user-select: none;
 }
 
 .navbar {
@@ -65,7 +67,7 @@ html {
 }
 
 .btn btn-primary {
-  background-color: #855621;
+  background-color: #852135;
   padding: 0;
   border: none;
   color: white;
@@ -86,94 +88,41 @@ html {
 }
 
 .chart-container-bs {
-  padding: 0em;
+  padding: 1em;
   box-sizing: border-box;
   max-width: 1000px;
   margin: auto;
-  margin-left: 20%;
+  margin-left: 6%;
   height: 110%;
+  font-family: "Montserrat", sans-serif;
 }
 
 .chart-container-bs .ol {
   list-style: none;
 }
 
-.level-1-box {
-  text-align: center;
-  margin-top: 5%;
+.grade-level {
+  color: #852135;
 }
 
-.level-2-wrapper {
-  position: relative;
-  display: grid;
+.semester-header {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.class-list {
   list-style: none;
-  grid-template-columns: repeat(2, 1fr);
 }
 
-.level-2-wrapper li {
-  position: relative;
-  width: 100%;
-}
-
-.level-2-box {
-  width: 80%;
-  margin: 0 auto 10px;
-  color: #83414f;
-  list-style: none;
-  text-align: center;
-  text-decoration: solid;
-  text-shadow: 1px 1px 4px rgb(244, 244, 244);
-}
-
-.level-3-wrapper {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-column-gap: 10px;
-  width: 110%;
-  margin-top: 2%;
-  list-style: none;
-  margin-right: 5%;
-}
-
-.level-3-box {
-  margin-bottom: 50px;
-  margin-top: 50px;
-  text-align: center;
-  text-decoration: underline;
-  margin-right: 5%;
-  padding: 1%;
-}
-
-.level-4-wrapper {
-  position: relative;
-  width: 100%;
-  height: 180%;
-  margin-left: -2em;
-  list-style: none;
-  align-content: center;
-}
-
-.level-4-box {
+.class-list-item {
   font-weight: normal;
   box-shadow: #48f44d;
   margin-bottom: 15%;
-  background: var(--level-4);
-  text-align: center;
-  width: 110%;
-  height: 110%;
-}
-
-.col {
-  width: 40em;
-  float: right;
-  position: relative;
 }
 
 #dialog {
   position: relative;
-  margin-top: -40em;
-  margin-left: 35em;
-  width: 40%;
+  width: 80%;
+  text-size-adjust: 200%;
 }
 
 #prereqID {
@@ -191,45 +140,4 @@ html {
   width: 50%;
   padding: 10px;
   box-sizing: border-box;
-}
-/***********************************/
-@media screen and (max-width: 700px) {
-  .rectangle {
-    padding: 20px 10px;
-  }
-
-  .level-1-box,
-  .level-2 {
-    width: 100%;
-  }
-
-  .level-1-box {
-    margin-bottom: 20px;
-  }
-
-  .level-1-box::before,
-  .level-2-wrapper > li::before {
-    display: none;
-  }
-
-  .level-2-wrapper,
-  .level-2-wrapper::after,
-  .level-2::after {
-    display: block;
-  }
-
-  .level-2-wrapper {
-    width: 90%;
-    margin-left: 10%;
-  }
-
-  .level-2-wrapper::before {
-    left: -20px;
-    width: 2px;
-    height: calc(100% + 40px);
-  }
-
-  .level-2-wrapper > li:not(:first-child) {
-    margin-top: 50px;
-  }
 }

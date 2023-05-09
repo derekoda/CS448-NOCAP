@@ -26,7 +26,7 @@ $(document).ready(function () {
   //dialog.hide();
 
   // Add a mouseover event listener to each course heading
-  $(".level-4-box").mouseover(function () {
+  $(".class-list-item").mouseover(function () {
     // Get the course ID from the data attribute
     var courseId = $(this).data("course-id");
     globalCourseID = courseId;
@@ -38,9 +38,11 @@ $(document).ready(function () {
       data: { course_id: courseId },
       success: function (response) {
         // first check if courses have data
+        document.getElementById("resc-lnks").style.display = "none";
         if (response.description) {
-
-          document.getElementById(courseId).style.color = "#e7983d"
+          document.getElementById(courseId).style.color = "#e7983d"; // highlight hovered course orange
+          document.getElementById(courseId).style.textShadow =
+            "1px 1px 10px white";
           // check here if a class has a prereq from the db
           if (response.prereq) {
             console.log(response.prereq);
@@ -50,11 +52,14 @@ $(document).ready(function () {
 
             // cycle through the array and highlight the prereq classes
             for (let i = 0; i < prereqClassArray.length; i++) {
-              console.log(`Element at i: ${prereqClassArray[i]}`);
-              document.getElementById(prereqClassArray[i]).style.color =
-                "#48f44d";
-              document.getElementById(prereqClassArray[i]).style.textShadow =
-                "1px 1px 10px white";
+              // console.log(`Element at i: ${prereqClassArray[i]}`);
+              
+                const prereqElement = document.getElementById(prereqClassArray[i]); 
+
+                if(prereqElement) {
+                  prereqElement.style.color = "#48f44d";
+                  prereqElement.style.textShadow = "1px 1px 10px white";
+                }
             }
           }
 
@@ -71,6 +76,7 @@ $(document).ready(function () {
           // Show the dialog box
           dialog.show();
         } else {
+          document.getElementById("resc-lnks").style.display = "unset";
           dialog.hide();
         }
       },
@@ -81,14 +87,16 @@ $(document).ready(function () {
   });
 
   // Add a mouseout event listener to hide the dialog box when the user moves the mouse away from a course heading
-  $(".level-4-box").mouseout(function () {
+  $(".class-list-item").mouseout(function () {
     dialog.hide();
     for (let i = 0; i < prereqClassArray.length; i++) {
-      console.log(`Element at i: ${prereqClassArray[i]}`);
+      // console.log(`Element at i: ${prereqClassArray[i]}`);
       document.getElementById(prereqClassArray[i]).style.color = "white";
       document.getElementById(prereqClassArray[i]).style.textShadow = "none";
-      document.getElementById(globalCourseID).style.color = "white";
     }
+    document.getElementById(globalCourseID).style.color = "white";
+    document.getElementById(globalCourseID).style.textShadow = "none";
+    document.getElementById("resc-lnks").style.display = "unset";
   });
 });
 

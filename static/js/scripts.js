@@ -65,7 +65,7 @@ $(document).ready(function () {
 
           // Set the dialog box content to the course info
           dialog.html(
-            "<h5>Course Name</h5>" +
+            "<h5 id=\"course-name\">Course Name</h5>" +
               response.name +
               "<br><br><strong>Description:</strong><br>" +
               response.description +
@@ -90,9 +90,13 @@ $(document).ready(function () {
   $(".class-list-item").mouseout(function () {
     dialog.hide();
     for (let i = 0; i < prereqClassArray.length; i++) {
+
+      const prereqElement = document.getElementById(prereqClassArray[i]);
       // console.log(`Element at i: ${prereqClassArray[i]}`);
-      document.getElementById(prereqClassArray[i]).style.color = "white";
-      document.getElementById(prereqClassArray[i]).style.textShadow = "none";
+      if(prereqElement) {
+        prereqElement.style.color = "white";
+        prereqElement.style.textShadow = "none";
+      }  
     }
     document.getElementById(globalCourseID).style.color = "white";
     document.getElementById(globalCourseID).style.textShadow = "none";

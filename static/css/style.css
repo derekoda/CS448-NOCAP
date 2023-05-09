@@ -93,6 +93,7 @@ html {
   max-width: 1000px;
   margin: auto;
   margin-left: 6%;
+  margin-top: 5%;
   height: 110%;
   font-family: "Montserrat", sans-serif;
 }
@@ -101,6 +102,10 @@ html {
   list-style: none;
 }
 
+#chart-title{
+  font-size: 50px;
+  text-shadow: 0 0 8px #852135;
+}
 .grade-level {
   color: #852135;
 }
@@ -127,6 +132,15 @@ html {
 
 #prereqID {
   color: #48f44d;
+}
+
+#course-name {
+  color: #e7983d;
+}
+
+#resource-links {
+  font-size: 30px;
+  margin-right: 20%;
 }
 
 /*Columns for degree flow chart*/

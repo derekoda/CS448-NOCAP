@@ -1,4 +1,8 @@
 # CS448-NOCAP
+Update---5/9.2MH
+    75% done through generating a schedule working on some more logic and should be complete tonight
+Update---5/9.1MH
+    Completed filtering out requiremnents list now I have to push the list back to flask and generate a schedule.
 Update---5/8.2MH
     Schedule Generator is almost complete just need to figure how to delete a list that had its requirements completed.
 Update---5/5.5MH

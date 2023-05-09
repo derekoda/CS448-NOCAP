@@ -1,10 +1,11 @@
 import sqlite3
+from time import strftime
+
 
 def generateSchedule2(coursesTaken,noTaken):
-    #print(coursesTaken)
-    print("***************")
-    for x in noTaken:
-        print(x)
+    
+    #for x in noTaken:
+    #    print(x)
     # establish connection to database
     connection = sqlite3.connect('courselist.db')
     cursor = connection.cursor()
@@ -13,8 +14,7 @@ def generateSchedule2(coursesTaken,noTaken):
     # create empty list to store schedules that don't contain the courses taken this list will be the filtered data from passed lists
     deficiencyList = []
     filtered_list = []
-    indices_to_remove = []
-    count = 0
+    
     '''Will compare both passed lists and store into another list which will this 3rd list
         is the requirements still not met in the degree audit. The list will take into account
         the students GPA to Avoid giving them a extremely difficult semester. The courses will be stacked in ascending order
@@ -22,21 +22,28 @@ def generateSchedule2(coursesTaken,noTaken):
     #begin filtering courses from lists
     for index, sublist in enumerate(noTaken):
         # stores the first iteratin of the enumerated noTaken list into courses
-        #courses = sublist
-        print("Print sublist=" , sublist)
+        
         #for each list of courses check each course individually
         for  element_in_sublist in sublist:
             #means this is just a one course
             if len(sublist) == 1:
                 for taken_element in coursesTaken:
+                    
                     if element_in_sublist == taken_element[0]:
+                       #The course has already been processed by another requirement
+                       if not sublist:
+                        continue
+                       #This is the first time we see the course process it
+                       elif len(sublist) >= 1:
                         sublist.remove(taken_element[0])
+                        
 
             if len(sublist) > 1:
                 #This means this list has a tailing number and needs one or more requirements
                 if sublist[-1] == 1 or sublist[-1] == 2:
+                    
                     counter = sublist[-1]#store the last element as a counter
-                    print(sublist[-1])
+                    
                     sublist.pop()
                     for taken_element in coursesTaken:
                         if element_in_sublist == taken_element[0]:
@@ -47,25 +54,117 @@ def generateSchedule2(coursesTaken,noTaken):
                             sublist.clear()
                 elif sublist[-1] != 1 and sublist[-1] != 2:
                     for taken_element in coursesTaken:
+                        
                         if element_in_sublist == taken_element[0]:
                             sublist.clear()# clean the list course matched
                             break
                         else:
                             continue
-
-
-            #If the list is a requirement that needs 1 or 2 to complete 
-            #check that its a list and its length is greater than 1
+                else:
+                    continue
             
-    print("**********Needed Courses**********")
-    
-    for y in noTaken: 
-        print(y)
+    #print("**********Needed Courses**********")
+    #to see the requirements list
+    #for y in noTaken: 
+    #    print(y)
 
 
     # return the deficiency list
-    return filtered_list
+    return noTaken
+def processSchedule(filterd_List, takenCourses ,gpa ):
+    for course in filterd_List:
+        print(course) 
+    for course in takenCourses:
+        print(course)
+    # establish connection to database
+    connection = sqlite3.connect('courselist.db')
+    cursor = connection.cursor()
+    cursor2 = connection.cursor()
 
+    #Get the current semester the student is attending
+    current_month = strftime('%B')
+    season= get_Season(current_month)
+
+    #Create final schedule that is to be returned
+    final_list= []
+
+    
+    #lets also check the semester
+    if "SP" in season:
+        #This will be for the Summer Semeters
+        final_list.append("Summer")
+    elif "SM" in season:
+        #This will be for the Summer Semeters
+        final_list.append("Fall")
+    else: 
+        #This will be for the Summer Semeters
+        final_list.append("Spring") 
+    #Evaluate GPA
+    if float(gpa) >= 3.5:
+        #We will pick 3 CS classes max for the student
+        count = 3
+        for course in filterd_List:
+            if 'CS' in course:
+                ...
+    elif float(gpa) >= 3.0 and float(gpa) < 3.5 :
+    #We will pick 2 CS classes max for the student
+        count = 2
+        pre = False 
+        offered = False
+        for sublist in filterd_List:
+            for element in sublist:
+                if element and element.startswith('CS'):
+                    
+                    cursor.execute("SELECT id, prereq, sem_offered FROM course_list WHERE id =?",(element,))
+                    result = cursor.fetchone()
+                    print(result)
+                    if result:
+                        req_number = 0
+                        for pre_req in result[1].split(', '):
+                            print(pre_req)
+                            
+                            for taken in takenCourses:
+                                count_taken = len(result[1].split(', '))
+                                print(count_taken)
+                                print(pre_req, taken[0])
+                                
+                                if pre_req.strip() == taken[0].strip():
+                                    print("taken True")
+                                    req_number += 1
+                                    print(req_number)
+                                elif req_number == count_taken:
+                                    pre = True
+                                else:
+                                    continue
+                            for seasonIn_list in result[2].split(', '):
+                                
+                                if seasonIn_list.startswith(season):
+                                    print("season True")
+                                    offered = True
+                        if pre and offered:
+                            print("appended =", result)
+                            final_list.append(result[0])
+
+                    print(result)
+                    print(final_list)
+                else:
+                    continue
+    elif float(gpa) < 3:
+    #We will pick 1 CS classes max for the student
+        count =1
+        ...
+    print(final_list)    
+    return final_list
+def get_Season(month):
+    seasons = {
+    'FA': ['August','September', 'October', 'November', 'December'],
+    'SP': ['January', 'February', 'March', 'April', 'May'],
+    'SM': ['April', 'June', 'July']
+    }
+    for season in seasons:
+        if month in seasons[season]:
+            return season
+    return 'Invalid input month'
 def generateSchedule(coursesTaken):
  # establish connection to database
     connection = sqlite3.connect('courselist.db')

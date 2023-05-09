@@ -16,6 +16,8 @@ def htmlScraper(html):
     course_elements = soup.find_all('tr', class_='takenCourse')#To find all courses taken
     course_req_Completed = soup.find_all('div', class_=regex)#To find blocks with completed requirements
     course_req_not_completed = soup.findAll('div', class_=regex2)#To find blocks for incomplete requirements
+    student_gpa_score= soup.find('td', class_='gpa number').get_text()
+    student_gpa_score = student_gpa_score.replace(" ", "" ).replace('\n', '').replace('\t','')
 
     # create a list of lists to store the course, description, and grade
     global course_list 
@@ -57,18 +59,20 @@ def htmlScraper(html):
     #This if statement well check the VWW block if there is a course completed it add it to the list of completed
     #Else it is assumed this block is not complete and has no courses to add.
         if 'Viewing a Wider World Requirement' in check_for_VWW:
-            not_VWW_Completed_name = not_complete.find('td',class_='course').text
-            not_VWW_Completed_Credits = not_complete.find('td', class_='credit').text
-            not_VWW_Completed_Description = not_complete.find('td',class_='description').text
+            if not_complete.find('td', class_='course') == None:
+                continue
+            else:
+                not_VWW_Completed_name = not_complete.find('td',class_='course').text
+                not_VWW_Completed_Description = not_complete.find('td',class_='description').text
 
-            #If in the description block the course name is change this statement will change the course name
-            if "CONVERTED TO:" in not_VWW_Completed_Description:
-                temp =[]
-                temp = not_VWW_Completed_Description.split(':')
-                not_VWW_Completed_name = temp[1]
-            #Now store in the non completed requirements array and add a second one for the missing req
-            course_req_list.append([not_VWW_Completed_name.replace(' E', '').replace(' ', '')])
-            course_req_list.append(["MISSING One VWW Course 3 Credits"])
+                #If in the description block the course name is change this statement will change the course name
+                if "CONVERTED TO:" in not_VWW_Completed_Description:
+                    temp =[]
+                    temp = not_VWW_Completed_Description.split(':')
+                    not_VWW_Completed_name = temp[1]
+                #Now store in the non completed requirements array and add a second one for the missing req
+                course_req_list.append([not_VWW_Completed_name.replace(' E', '').replace(' ', '')])
+                course_req_list.append(["MISSING One VWW Course 3 Credits"])
         else:
             #This is not the VWW Block and follows a different pattern
             #Check for all none taken courses in the block
@@ -77,7 +81,7 @@ def htmlScraper(html):
             for m in courses_not_Taken_In_Block:
                 m=m.text
                 if "Take two of" in m:
-                    flag = True
+                    
                     #Strips the empty space from the CS courses
                     if "C S" in m:
                         m = m.replace("C S", "CS")
@@ -91,16 +95,20 @@ def htmlScraper(html):
                     
                  #If the requirements need two courses to complete
                 elif "Take two courses from the following:" in m:
-                    take = not_complete.find('td',class_='fromcourselist').text
-                    #Split into a list
-                    take =[cls.strip() for cls in take.split(',') if cls.strip()]
-                    #Remove all white space and remove odd C S format
-                    take= [course.replace("C S ", "") for course in take]
-                    #Add CS to courses for eval
-                    take = ['CS'+ x if x != take else x for x in take]
-                    take.append(2)
-                   
-                    course_req_list.append(take)
+                    
+                    if not_complete.find('td', class_='fromcourselist') == None:
+                        continue
+                    else:
+                        take = not_complete.find('td',class_='fromcourselist').text
+                        #Split into a list
+                        take =[cls.strip() for cls in take.split(',') if cls.strip()]
+                        #Remove all white space and remove odd C S format
+                        take= [course.replace("C S ", "") for course in take]
+                        #Add CS to courses for eval
+                        take = ['CS'+ x if x != take else x for x in take]
+                        take.append(2)
+                    
+                        course_req_list.append(take)
                 else:
                     #Strips the empty space from the CS courses
                     if "C S" in m:
@@ -115,13 +123,14 @@ def htmlScraper(html):
                 
     #print("Taken Courses")         
     # this is just to verify that the list is being populated correctly
-    print(*course_list, sep = '\n')   
-    print("***********************")
+    #print(*course_list, sep = '\n')   
+    
  
     #Clean the course requirements list
     course_req_list_reduced = [item for item in course_req_list if item]
 
-    final_schedule = gene.generateSchedule2(course_list, course_req_list_reduced)
+    filterd_Reqs = gene.generateSchedule2(course_list, course_req_list_reduced)
+    final_schedule = gene.processSchedule(filterd_Reqs, course_list, student_gpa_score)
     return final_schedule
         
    

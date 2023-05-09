@@ -65,7 +65,7 @@ html {
 }
 
 .btn btn-primary {
-  background-color: #852135;
+  background-color: #855621;
   padding: 0;
   border: none;
   color: white;
@@ -86,11 +86,11 @@ html {
 }
 
 .chart-container-bs {
-  padding: 1em;
+  padding: 0em;
   box-sizing: border-box;
   max-width: 1000px;
   margin: auto;
-  margin-left: 27%;
+  margin-left: 20%;
   height: 110%;
 }
 
@@ -117,7 +117,7 @@ html {
 
 .level-2-box {
   width: 80%;
-  margin: 0 auto 40px;
+  margin: 0 auto 10px;
   color: #83414f;
   list-style: none;
   text-align: center;
@@ -130,9 +130,9 @@ html {
   grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 10px;
   width: 110%;
-  margin: 0 auto;
+  margin-top: 2%;
   list-style: none;
-  margin-right: 10%;
+  margin-right: 5%;
 }
 
 .level-3-box {
@@ -173,7 +173,7 @@ html {
   position: relative;
   margin-top: -40em;
   margin-left: 35em;
-  width: 90%;
+  width: 40%;
 }
 
 #prereqID {

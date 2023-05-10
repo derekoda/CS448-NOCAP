@@ -1,4 +1,6 @@
 # CS448-NOCAP
+Update---5/10.1MH
+    Finished Logic for Scheduler now I have to send it back to flask and display as flow chart
 Update---5/9.2MH
     75% done through generating a schedule working on some more logic and should be complete tonight
 Update---5/9.1MH

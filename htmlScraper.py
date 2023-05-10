@@ -54,12 +54,14 @@ def htmlScraper(html):
     #    attach them to the course_req_list which will then be passed to the scheduler
     #    to process the potential schedule for the student.
     for not_complete in course_req_not_completed:
+        
         check_for_VWW = not_complete.find('div',class_='reqTitle').text
-
+        
     #This if statement well check the VWW block if there is a course completed it add it to the list of completed
     #Else it is assumed this block is not complete and has no courses to add.
         if 'Viewing a Wider World Requirement' in check_for_VWW:
             if not_complete.find('td', class_='course') == None:
+                course_req_list.append(["MISSING Two VWW Course 3 Credits"])
                 continue
             else:
                 not_VWW_Completed_name = not_complete.find('td',class_='course').text

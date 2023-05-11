@@ -1,17 +1,27 @@
 # CS448-NOCAP
+Update---5/10.2DO
+    Displaying flowchart on schedule page, needs some refinement for aesthetics. Will make it look good and add more functionality
+    in next update.
+    
 Update---5/10.1MH
     Finished Logic for Scheduler now I have to send it back to flask and display as flow chart
+    
 Update---5/9.2MH
     75% done through generating a schedule working on some more logic and should be complete tonight
+    
 Update---5/9.1MH
     Completed filtering out requiremnents list now I have to push the list back to flask and generate a schedule.
+    
 Update---5/8.2MH
     Schedule Generator is almost complete just need to figure how to delete a list that had its requirements completed.
+    
 Update---5/5.5MH
     HTML Scraper now captures all courses required. Then passes them to the scheduler for processing. Then sends it back to the
     client via flask.
+    
 Update---4/29 - 5/1.1MH 
-    Started working on scrapping requirements from the html file to be able to generate a schedule for the student.
+    Started working on scraping requirements from the html file to be able to generate a schedule for the student.
+    
 Update---4/13//4.3.MH  
     Fixed div CSS on degreeflow it now populates centered with a rounded border.
     

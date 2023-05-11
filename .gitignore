@@ -8,3 +8,5 @@ pyvenv.cfg
 .svg
 .pdf
 scrapper.py
+*.svg
+*.gv

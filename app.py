@@ -6,6 +6,7 @@ from jinja2 import * #Template framework for Flask to manipulate html data clien
 import staticFlowChart as flow
 import scheduleGenerator as scheduleGen
 import sqlite3
+
 #from flask_wtf import *
 #sfrom wtforms import *
 
@@ -101,10 +102,10 @@ def upload_html():
 
     # call generateSchedule function with list of courses taken
     deficiencySet = course_list#scheduleGen.generateSchedule(course_list)
-    
-    #print (deficiencySet)
-    # render deficiency set in template
-    return render_template('schedule.html', deficiencySet=deficiencySet, page='coursemenu')
+
+    flowchart = scheduleGen.generate_flowchart(course_list)
+    svg = flowchart.pipe(format='svg').decode('utf-8')
+    return render_template('schedule.html', page='schedule', svg=svg, style='background-color: #212529;')
 
 @app.route('/schedule', methods=['GET','POST'])
 def schedule():

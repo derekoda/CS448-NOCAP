@@ -1,6 +1,43 @@
 import sqlite3
 from time import strftime
 from itertools import cycle
+from graphviz import Digraph
+
+def generate_flowchart(course_list):
+    conn = sqlite3.connect('courselist.db')
+    cursor = conn.cursor()
+    courses = ', '.join(f"'{cursor}'" for cursor in course_list)
+    cursor.execute(f"SELECT id, prereq FROM course_list WHERE id IN ({courses})")
+    rows = cursor.fetchall()
+    conn.close()
+
+    course_dict = {}
+    for row in rows:
+        course_dict[row[0]] = row[1]
+
+    dot = Digraph(engine='dot')
+    for course in course_dict:
+        if course_dict[course]:
+            prereq_list = course_dict[course].split(', ')
+            for prereq in prereq_list:
+                dot.edge(prereq, course)
+        else:
+            dot.node(course, shape='box', style='filled', color='#2b3035')
+            
+    dot.attr('edge', color='white', arrowhead='open')
+    dot.attr('graph', rankdir='TB')
+
+    for course in course_list:
+        if course in course_dict:
+            prereq_string = course_dict[course] or ''
+            prereq_list = prereq_string.split(', ')
+            prereq_string = '\n'.join(prereq_list)
+
+            dot.node(course, label=f'<<b>{course}</b>>', shape='box', style='filled', color='green', fill='green', fontsize='14', fixedsize='true', width='1.5', height='1')
+        else:
+            dot.node(course, label=f'<<b>{course}</b>>', shape='box', style='filled', color='white', fill='white', fontsize='14', fixedsize='true', width='1.5', height='1')
+
+    return dot
 
 def generateSchedule2(coursesTaken,noTaken):
     
@@ -27,12 +64,12 @@ def generateSchedule2(coursesTaken,noTaken):
                 for taken_element in coursesTaken:
                     
                     if element_in_sublist == taken_element[0]:
-                       #The course has already been processed by another requirement
-                       if not sublist:
-                        continue
-                       #This is the first time we see the course process it
-                       elif len(sublist) >= 1:
-                        sublist.remove(taken_element[0])
+                        #The course has already been processed by another requirement
+                        if not sublist:
+                            continue
+                        #This is the first time we see the course process it
+                        elif len(sublist) >= 1:
+                            sublist.remove(taken_element[0])
                         
 
             if len(sublist) > 1:
@@ -89,20 +126,20 @@ def processSchedule(filterd_List, takenCourses ,gpa ):
     #lets also check the semester
     
     while index <=2:  
-        if index == 2:
-            current_index = seasons_order.index(season)
-            next_index = (current_index + 1) % len(seasons_order)  # Wrap around to the beginning if reached the end
-            season = seasons_order[next_index] 
+        # if index == 2:
+        #     current_index = seasons_order.index(season)
+        #     next_index = (current_index + 1) % len(seasons_order)  # Wrap around to the beginning if reached the end
+        #     season = seasons_order[next_index] 
 
-        if "SP" in season:
-            #This will be for the Summer Semeters
-            final_list.append("Summer")
-        elif "SM" in season:
-            #This will be for the Summer Semeters
-            final_list.append("Fall")
-        else: 
-            #This will be for the Summer Semeters
-            final_list.append("Spring") 
+        # if "SP" in season:
+        #     #This will be for the Summer Semeters
+        #     final_list.append("Summer")
+        # elif "SM" in season:
+        #     #This will be for the Summer Semeters
+        #     final_list.append("Fall")
+        # else: 
+        #     #This will be for the Summer Semeters
+        #     final_list.append("Spring") 
         #Evaluate GPA
         if float(gpa) >= 3.5:
             #We will pick 3 CS classes max for the student
@@ -448,11 +485,11 @@ def processSchedule(filterd_List, takenCourses ,gpa ):
     
         print("Final List")
         print(final_list)
-        final_list.append("optional")
-        print("Optional Courses")
-        print(optional)    
-        final_list.append(optional)
-        print(final_list)
+        # final_list.append("optional")
+        # print("Optional Courses")
+        # print(optional)    
+        # final_list.append(optional)
+        # print(final_list)
         return final_list
     index += 1#Change the semester
 #Seasons function for selecting the semester

@@ -143,15 +143,44 @@ html {
   margin-right: 20%;
 }
 
-/*Columns for degree flow chart*/
-.container {
-  width: 100%;
-  overflow: hidden;
+.flowchart-container {
+  display: flex;
+  justify-content: center;
+  size: 100%;
 }
 
-.column {
-  float: left;
-  width: 50%;
-  padding: 10px;
-  box-sizing: border-box;
+.flowchart {
+  height: 100%;
+}
+
+
+
+.node-label {
+  font-size: 14px;
+  fill: #ffffff;
+}
+
+.edge {
+  stroke-width: 2px;
+  stroke-dasharray: none;
+  color: #ffffff;
+}
+
+.graph polygon {
+  fill: #212529 !important;
+  stroke: #ffffff !important;
+}
+
+.node polygon {
+  fill: #ffffff !important;
+}
+
+ellipse {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+.edge path, polygon{
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
 }

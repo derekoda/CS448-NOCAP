@@ -105,7 +105,11 @@ def upload_html():
 
     flowchart = scheduleGen.generate_flowchart(course_list)
     svg = flowchart.pipe(format='svg').decode('utf-8')
-    return render_template('schedule.html', page='schedule', svg=svg, style='background-color: #212529;')
+    course_list_display = "<ul>"
+    for course in course_list:
+        course_list_display += "<li>" + course + "</li>"
+    course_list_display += "</ul>"
+    return render_template('schedule.html', page='schedule', svg=svg, style='background-color: #212529;', course_list_display=course_list_display)
 
 @app.route('/schedule', methods=['GET','POST'])
 def schedule():

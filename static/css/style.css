@@ -168,11 +168,19 @@ html {
 
 .graph polygon {
   fill: #212529 !important;
-  stroke: #ffffff !important;
+  stroke: #852135 !important;
 }
 
 .node polygon {
   fill: #ffffff !important;
+  stroke: #852135 !important;
+  stroke-width: 3px;
+}
+
+.node ellipse {
+  fill: #ffffff !important;
+  stroke: #852135 !important;
+  stroke-width: 3px;
 }
 
 ellipse {
@@ -181,6 +189,6 @@ ellipse {
 }
 
 .edge path, polygon{
-  fill: #ffffff !important;
-  stroke: #ffffff !important;
+  fill: #852135 !important;
+  stroke: #852135 !important;
 }
